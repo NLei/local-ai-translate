@@ -123,11 +123,17 @@ def fetch_base(workdir, tarball):
         f.write(raw)
     print("基础层已就绪 %s (%.0f MB)" % (p, len(raw) / 1e6))
     return p
-    p = os.path.join(workdir, "base-layer.tar")
-    with open(p, "wb") as f:
-        f.write(raw)
-    print("基础层已下载并解压为 %s (%.0f MB)" % (p, len(raw) / 1e6))
-    return p
+
+
+def pick_server_bin(app_dir):
+    """定位编译产物：优先静态版（llama-server-static），兼容普通构建命名；可用 LLAMA_SERVER_BIN 覆盖。"""
+    if os.environ.get("LLAMA_SERVER_BIN"):
+        return os.environ["LLAMA_SERVER_BIN"]
+    for cand in ("llama.cpp-repo/build/bin/llama-server-static",
+                 "llama.cpp-repo/build/bin/llama-server"):
+        if os.path.isfile(os.path.join(app_dir, cand)):
+            return cand
+    raise FileNotFoundError("未找到 llama-server：请先按 README「方式二」编译，或用 LLAMA_SERVER_BIN 环境变量指定路径")
 
 
 if __name__ == "__main__":
@@ -138,7 +144,7 @@ if __name__ == "__main__":
     base_tarball = os.environ.get("BASE_TARBALL", "/tmp/ai-translate-build/ubuntu-base.tar.gz")
     base_layer = fetch_base(work, base_tarball)
     entries = [
-        ("llama.cpp-repo/build/bin/llama-server-static", "app/llama-server", True),
+        (pick_server_bin(app), "app/llama-server", True),
         ("web/index.html", "app/web/index.html", False),
         ("web/chat.html", "app/web/chat.html", False),
         ("docker/entrypoint.sh", "app/entrypoint.sh", True),

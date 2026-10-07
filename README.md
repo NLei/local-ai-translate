@@ -32,32 +32,54 @@
 
 ## 快速开始
 
-### 在线部署（有网服务器）
+### 方式一：使用 Releases 镜像包（推荐，无需编译）
+
+1. 从本仓库 **Releases** 页下载镜像包：主镜像（质量最佳）或轻量镜像（零漏译、529MB）
+2. 导入并启动：
 
 ```bash
-docker run -d --name ai-translate -p 8080:8080 --restart unless-stopped \
-  ai-translate:hy-mt2-1.8b
-# 浏览器打开 http://<服务器IP>:8080
-```
-
-或用 compose：
-
-```bash
-cd docker && docker compose up -d
-```
-
-### 离线部署（无网服务器）
-
-```bash
-# ① 从本仓库 Releases 下载 tar.gz（或自行构建），拷贝到离线服务器（U盘/内网）
-# ② 一键导入并启动（轻量版把镜像名换成 ai-translate:qwen35-0.8b）
 docker load < ai-translate-hy-mt2-1.8b.tar.gz
 docker run -d --name ai-translate -p 8080:8080 --restart unless-stopped \
   ai-translate:hy-mt2-1.8b
+curl http://localhost:8080/health     # {"status":"ok"}，浏览器打开 http://localhost:8080
 ```
 
-> 镜像内已包含模型与运行时，加载后完全离线运行，无任何外部依赖。
-> **已部署容器单独更新前端页面**：`docker cp web/index.html ai-translate:/app/web/ && docker cp web/chat.html ai-translate:/app/web/`，刷新浏览器即生效，无需重启容器或重载镜像。
+有外网的服务器也可以用 compose：`cd docker && docker compose up -d`。
+
+> 镜像内已包含模型与运行时，加载后完全离线运行。
+> **已部署容器单独更新前端页面**：`docker cp web/index.html ai-translate:/app/web/ && docker cp web/chat.html ai-translate:/app/web/`，刷新浏览器即生效。
+
+### 方式二：Clone 源码，自行下载模型与依赖后构建
+
+```bash
+# ① 克隆项目，拉取 llama.cpp 源码（固定 commit，保证可复现）
+git clone https://github.com/<你的用户名>/ai-translate.git
+cd ai-translate
+./scripts/fetch_llama_cpp.sh
+
+# ② 编译静态 llama-server（约 3~5 分钟；需 cmake 3.14+ 与 gcc/g++，AVX2 支持详见下文）
+cmake -B llama.cpp-repo/build -S llama.cpp-repo \
+  -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF \
+  -DGGML_NATIVE=OFF -DGGML_AVX2=ON -DGGML_FMA=ON -DGGML_AVX512=OFF \
+  -DLLAMA_CURL=OFF -DLLAMA_BUILD_TESTS=OFF -DLLAMA_BUILD_EXAMPLES=OFF -DLLAMA_BUILD_SERVER=ON
+cmake --build llama.cpp-repo/build --target llama-server -j"$(nproc)"
+
+# ③ 下载模型权重（约 1.7GB；ModelScope 优先、失败自动回退 hf-mirror，支持断点续传）
+./scripts/download_models.sh
+
+# ④ 生成镜像（二选一）并导入
+docker build -f docker/Dockerfile -t ai-translate:hy-mt2-1.8b .       # 需要 docker
+# 或无需 docker（离线组装，原理见 docs/DEVELOPMENT.md）：
+python3 scripts/assemble_image.py . out.tar "ai-translate:hy-mt2-1.8b"
+docker load < out.tar
+
+# ⑤ 运行
+docker run -d --name ai-translate -p 8080:8080 --restart unless-stopped \
+  ai-translate:hy-mt2-1.8b
+```
+
+轻量镜像：步骤④ 换用 `docker/Dockerfile.light`（或组装时 `MODEL_SRC=models/Qwen3.5-0.8B-Q4_K_M.gguf`），tag 用 `ai-translate:qwen35-0.8b`。
+说明：编译选项不绑定构建机 CPU 型号，要求目标 CPU 支持 AVX2/FMA（2013 年后的 x86_64 均支持）；base rootfs（约 30MB）首次组装时自动从 cdimage.ubuntu.com 下载，无外网的构建环境见 [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)。
 
 ## WebUI
 
@@ -172,29 +194,10 @@ WSL 默认无 systemd。两选一：① 在 `/etc/wsl.conf` 写入 `[boot]` 段 
 
 ## 构建与产物
 
-两条等价的构建路径：
+两条等价的构建路径（完整命令见上方「方式二」，原理与踩坑记录见 [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)）：
 
-1. **标准 docker build**（任意有 docker 的机器）：`docker build -f docker/Dockerfile -t ai-translate:hy-mt2-1.8b .`
-2. **离线组装** `scripts/assemble_image.py`：不依赖容器引擎，直接把 ubuntu-base 官方 rootfs + 静态 llama-server + 模型组装成 `docker load` 兼容的镜像 tar（本仓库交付的 tar.gz 即由它产出）
-
-> 为什么会有路径 2：llama.cpp 需要现场编译，而有些构建环境（如本项目的 WSL 沙箱）无法安装 docker/无 root 权限，此脚本绕过容器引擎直接产出标准镜像，产物与 docker build 功能一致。
-> **原理、换模型、重新评测与踩坑记录，见 [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)。**
-
-## 从源码构建
-
-```bash
-# 主镜像（Hy-MT2）
-docker build -f docker/Dockerfile -t ai-translate:hy-mt2-1.8b .
-
-# 轻量镜像（Qwen3.5-0.8B）
-docker build -f docker/Dockerfile.light -t ai-translate:qwen35-0.8b .
-
-# 或离线组装（无需 docker）
-MODEL_SRC=models/Hy-MT2-1.8B-Q4_K_M.gguf python3 scripts/assemble_image.py . out.tar "ai-translate:hy-mt2-1.8b"
-```
-
-构建依赖：ubuntu:24.04（编译 llama.cpp，静态链接）+ debian:bookworm-slim（运行时）。
-llama.cpp 编译选项：`-DGGML_NATIVE=OFF -DGGML_AVX2=ON -DGGML_FMA=ON`——不绑定构建机 CPU 型号，要求目标 CPU 支持 AVX2/FMA（2013 年后的 x86_64 均支持）。
+1. **标准 docker build**（任意有 docker 的机器）
+2. **离线组装** `scripts/assemble_image.py`（无容器引擎环境；本仓库交付的 tar.gz 即由它产出）
 
 ## 本地开发（不用 Docker）
 
@@ -221,6 +224,8 @@ docker/Dockerfile.light 轻量镜像构建（Qwen3.5-0.8B）
 docker/docker-compose.yml
 docker/entrypoint.sh
 scripts/assemble_image.py   离线镜像组装（无需 docker）
+scripts/download_models.sh  模型权重下载（ModelScope 优先，自动回退）
+scripts/fetch_llama_cpp.sh  拉取固定 commit 的 llama.cpp 源码
 scripts/bench_translate.py  翻译质量评测
 scripts/test_general.py     通用能力测试（代码/总结/数据整理）
 scripts/test_techdoc.py     技术文档翻译实测
