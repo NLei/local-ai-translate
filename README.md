@@ -34,8 +34,9 @@
 
 ### 方式一：使用 Releases 镜像包（推荐，无需编译）
 
-1. 从本仓库 **Releases** 页下载镜像包：主镜像（质量最佳）或轻量镜像（零漏译、529MB）
-2. 导入并启动：
+镜像未发布到任何公共镜像仓库，**必须先从 Releases 下载 tar.gz 并 `docker load` 导入本地**，之后才能 `docker run`（直接 `docker run` 一个不存在的 tag 会报 pull access denied）。
+
+**主镜像**（Hy-MT2-1.8B，质量最佳，1.07GB）：
 
 ```bash
 docker load < ai-translate-hy-mt2-1.8b.tar.gz
@@ -44,9 +45,18 @@ docker run -d --name ai-translate -p 8080:8080 --restart unless-stopped \
 curl http://localhost:8080/health     # {"status":"ok"}，浏览器打开 http://localhost:8080
 ```
 
-有外网的服务器也可以用 compose：`cd docker && docker compose up -d`。
+**轻量镜像**（Qwen3.5-0.8B，零漏译，529MB；如果与主镜像并存需要换个端口和容器名）：
 
-> 镜像内已包含模型与运行时，加载后完全离线运行。
+```bash
+docker load < ai-translate-qwen35-0.8b.tar.gz
+docker run -d --name ai-translate-light -p 8081:8080 --restart unless-stopped \
+  ai-translate:qwen35-0.8b
+# 浏览器打开 http://localhost:8081
+```
+
+两个容器同时跑时注意内存：主镜像约 2.4GB + 轻量镜像约 0.9GB。
+
+> 镜像导入后完全离线运行。compose 用户：镜像 load 进本地后即可 `cd docker && docker compose up -d`（compose 文件不含 build 配置，不会自动拉取或构建）。
 > **已部署容器单独更新前端页面**：`docker cp web/index.html ai-translate:/app/web/ && docker cp web/chat.html ai-translate:/app/web/`，刷新浏览器即生效。
 
 ### 方式二：Clone 源码，自行下载模型与依赖后构建
