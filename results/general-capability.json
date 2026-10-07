@@ -1,0 +1,198 @@
+{
+ "Hy-MT2-1.8B": {
+  "非思考": {
+   "code-ipv4": {
+    "name": "代码生成：IPv4 校验函数 + 自测断言",
+    "score": false,
+    "detail": "exit=1 stderr=' (most recent call last):\\n  File \"/home/user/Nlei/trans/results/general-tmp/ipv4.py\", line 1, in <module>\\n    assert not is_valid_ipv4(\\'256.1.1.1\\')  # 非法\\nNameError: name \\'is_valid_ipv4\\' is not defined'",
+    "wall": 7.3,
+    "has_think": false,
+    "reasoning_len": 0,
+    "output": "```python\nassert not is_valid_ipv4('256.1.1.1')  # 非法\nassert not is_valid_ipv4('192.168.01.1')  # 非法\nassert is_valid_ipv4('0.0.0.0')  # 合法\nassert is_valid_ipv4('0.0.0.1')  # 合法\nassert is_valid_ipv4('1.1.1.1')  # 合法\nassert is_valid_ipv4('255.255.255.255')  # 合法\nassert OK\n```"
+   },
+   "code-wordfreq": {
+    "name": "代码生成：词频统计脚本",
+    "score": false,
+    "detail": "期望='the 11 | quick 7 | dog 6 | fox 6 | and 5' 实际='everyserviceneedsaquickhealthcheck. 1 | noweverydogandeveryfoxsleeps. 1 | quickquickquickresponse! 1 | quickresponsetime'",
+    "wall": 6.9,
+    "has_think": false,
+    "reasoning_len": 0,
+    "output": "```python\nwith open('input.txt', 'r', encoding='utf-8') as f:\n    text = f.read()\nwords = [word.lower() for word in text.replace(' ', '').split() if word not in [' ', '\\t', '\\n']]\nword_count = {}\nfor w in words:\n    word_count[w] = word_count.get(w, 0) + 1\nsorted_words = sorted(word_count.items(), key=lambda x: (-x[1], x[0]))\nfor w, c in sorted_words[:5]:\n    print(f\"{w} {c}\")\n```"
+   },
+   "doc-summary": {
+    "name": "文档总结（约 700 字 → ≤150 字）",
+    "score": 4,
+    "detail": "命中关键事实 4/5: ['2026 年 8 月 28 日', '400 毫秒', '70 台', '1.8 秒'] | 长度 246 字",
+    "wall": 12.2,
+    "has_think": false,
+    "reasoning_len": 0,
+    "output": "星云数据平台2.0于2026年8月28日正式上线，由数据工程组耗时14个月重构，解决1.0版本多租户场景性能与运维问题。核心改进包括查询引擎全面重写，聚合查询P95延迟从1.8秒降至400毫秒，服务器数量从120台减至70台，年硬件成本节约380万元；易用性提升，业务分析师可自助完成80%日常取数需求。上线首月日均活跃用户从2100人增至4600人，非技术岗位占比超一半。当前需完成60个下游应用迁移，列式存储实时写入功能待完善，管理层计划后续重点统一实时链路、开放分析能力及压降存储成本。"
+   },
+   "data-contacts": {
+    "name": "数据整理：20 行杂乱联系人 → CSV",
+    "score": false,
+    "detail": "N/A=0 行数=19≠20; 行12列数=2",
+    "wall": 11.7,
+    "has_think": false,
+    "reasoning_len": 0,
+    "output": "姓名,电话,城市\n张三,13800138000,北京\n李四,13900139000,上海\n王五,13700137000,深圳\n赵六,13600136000,杭州\n孙七,13500135000,\n周八,13400134000,广州\n吴九,13300133000,成都\n郑十,13200132000,武汉\n陈一,13100131000,南京\n林二,13000130000,西安\n黄三,15900159000,重庆\n徐四,15800158000\n何五,15700157000,天津\n高六,15600156000,苏州\n罗七,15500155000,长沙\n梁八,15400154000,青岛\n宋九,15300153000,大连\n唐十,15200152000,宁波\n许一,15100151000,无锡"
+   }
+  }
+ },
+ "Qwen3-0.6B": {
+  "非思考": {
+   "code-ipv4": {
+    "name": "代码生成：IPv4 校验函数 + 自测断言",
+    "score": false,
+    "detail": "exit=1 stderr='File \"/home/user/Nlei/trans/results/general-tmp/ipv4.py\", line 1\\n    ```python\\n    ^\\nSyntaxError: invalid syntax'",
+    "wall": 25.9,
+    "has_think": false,
+    "reasoning_len": 0,
+    "output": "```python\ndef is_valid_ipv4(s):\n    if len(s) != 4:\n        return False\n    for i in range(4):\n        if not s[i].isdigit():\n            return False\n    return True\n\nassert is_valid_ipv4(\"256.1.1.1\") == True\nassert is_valid_ipv4(\"192.168.01.1\") == True\nassert is_valid_ipv4(\"255.255.255.255\") == True\nassert is_valid_ipv4(\"255.255.255.0\") == True\nassert is_valid_ipv4(\"255.255.255.2550\") == True\nassert is_valid_ipv4(\"255.255.255.25500\") == True\nassert is_valid_ipv4(\"255.255.255.255000\") == True\nassert is_valid_ipv4(\"255.255.255.2550000\") == True\nassert is_valid_ipv4(\"255.255.255.25500000\") == True\nassert is_valid_ipv4(\"255.255.255.255000000\") == True\nassert is_valid_ipv4(\"255.255.255.2550000000\") == True\nassert is_valid_ipv4(\"255.255.255.25500000000\") == True\nassert is_valid_ipv4(\"255.255.255.255000000000\") == True\nassert is_valid_ipv4(\"255.255.255.2550000000000\") == True\nassert is_valid_ipv4(\"255.255.255.25500000000000\") == True\nassert is_valid_ipv4(\"255.255.255.255000000000000\") == True\nassert is_valid_ipv4(\"255.255.255.2550000000000000\") == True\nassert is_valid_ipv4(\"255.255.255.25500000000000000\") == True\nassert is_valid_ipv4(\"255.255.255.255000000000000000\") == True\nassert is_valid_ipv4(\"255.255.255.2550000000000000000\") == True\nassert is_valid_ipv4(\"255.255.255.25500000000000000000\") == True\nassert is_valid_ipv4(\"255.255.255.255000000000000000000\") == True\nassert is_valid_ipv4(\"255.255.255.2550000000000000000000\") == True\nassert is_valid_ipv4(\"255.255.255.25500000000000000000000\") == True\nassert is_valid_ipv4(\"255.255.255.255000000000000000000000\") == True\nassert is_valid_ipv4(\"255.255.255.2550000000000000000000000\") == True\nassert is_valid_ipv4(\"255.255.255.25500000000000000000000000\") == True\nassert is_valid_ipv4(\"255.255.255.2550000000000000000"
+   },
+   "code-wordfreq": {
+    "name": "代码生成：词频统计脚本",
+    "score": false,
+    "detail": "期望='the 11 | quick 7 | dog 6 | fox 6 | and 5' 实际='fox 6 | the 6 | The 5 | and 5 | dog 4'",
+    "wall": 3.7,
+    "has_think": false,
+    "reasoning_len": 0,
+    "output": "```python\nimport os\nfrom collections import Counter\n\ndef process_input_file(file_path):\n    with open(file_path, 'r', encoding='utf-8') as f:\n        text = f.read()\n    return text\n\ndef process_and_output_words(text):\n    words = text.split()\n    word_counts = Counter(words)\n    sorted_words = sorted(word_counts.items(), key=lambda x: (-x[1], x[0]))\n    output = [f\"{word} {count}\" for word, count in sorted_words[:5]]\n    return '\\n'.join(output)\n\nif __name__ == \"__main__\":\n    input_file = os.path.join(os.getcwd(), 'input.txt')\n    processed = process_and_output_words(process_input_file(input_file))\n    print(processed)\n```"
+   },
+   "doc-summary": {
+    "name": "文档总结（约 700 字 → ≤150 字）",
+    "score": 3,
+    "detail": "命中关键事实 3/5: ['2026 年 8 月 28 日', '400 毫秒', '70 台'] | 长度 228 字",
+    "wall": 5.9,
+    "has_think": false,
+    "reasoning_len": 0,
+    "output": "星云数据平台2.0于2026年8月28日正式上线，由数据工程组重构完成，解决了1.0版本的性能与运维问题。核心改进包括查询引擎优化，聚合查询P95延迟下降至400毫秒，服务器数量缩减至70台，年度成本节约380万元。同时，新增SQL编辑器与血缘分析视图，提升业务分析师效率。升级后，1.0旧版API将于2027年停用，需迁移60个应用，数据工程组已提供支持。管理层计划统一实时链路、开放自助分析能力，压降存储成本，整体上线目标达成，为后续平台演进奠定基础。"
+   },
+   "data-contacts": {
+    "name": "数据整理：20 行杂乱联系人 → CSV",
+    "score": false,
+    "detail": "N/A=0 行数=19≠20; 行12列数=2",
+    "wall": 9.2,
+    "has_think": false,
+    "reasoning_len": 0,
+    "output": "姓名,电话,城市\n张三,13800138000,北京\n李四,13900139000,上海\n王五,13700137000,深圳\n赵六,13600136000,杭州\n孙七,13500135000,广州\n吴九,13300133000,成都\n郑十,13200132000,武汉\n张三,13800138000,北京\n陈一,13100131000,南京\n林二,13000130000,西安\n黄三,15900159000,重庆\n徐四,15800158000\n何五,15700157000,天津\n高六,15600156000,苏州\n罗七,15500155000,长沙\n梁八,15400154000,青岛\n宋九,15300153000,大连\n唐十,15200152000,宁波\n许一,15100151000,无锡"
+   }
+  },
+  "思考": {
+   "code-ipv4": {
+    "name": "代码生成：IPv4 校验函数 + 自测断言",
+    "score": false,
+    "detail": "exit=1 stderr='Traceback (most recent call last):\\n  File \"/home/user/Nlei/trans/results/general-tmp/ipv4.py\", line 12, in <module>\\n    assert is_valid_ipv4(\\'256.1.1.1\\') == True\\nAssertionError'",
+    "wall": 26.8,
+    "has_think": false,
+    "reasoning_len": 1563,
+    "output": "```python\ndef is_valid_ipv4(s):\n    parts = s.split('.')\n    if len(parts) != 4:\n        return False\n    for part in parts:\n        if not part.isdigit():\n            return False\n        if int(part) < 0 or int(part) > 255:\n            return False\n    return True\n\nassert is_valid_ipv4('256.1.1.1') == True\nassert is_valid_ipv4('192.168.01.1') == True\nassert is_valid_ipv4('0.0.0.0') == False\nassert is_valid_ipv4('0000.0000.0000.0000') == False\nassert is_valid_ipv4('192.168.000.000') == False\nassert is_valid_ipv4('192.168.000.0000') == False\nprint(\"OK\")\n```"
+   },
+   "code-wordfreq": {
+    "name": "代码生成：词频统计脚本",
+    "score": false,
+    "detail": "exit=1 stderr='Traceback (most recent call last):\\n  File \"/home/user/Nlei/trans/results/general-tmp/wordfreq.py\", line 10, in <module>\\n    words = re.split(r\\'[^a-zA-Z0-9]\\', text)\\nNameError: name \\'re\\' is not defined'",
+    "wall": 28.2,
+    "has_think": false,
+    "reasoning_len": 2341,
+    "output": "```python\nimport os\nimport sys\nfrom collections import Counter\n\nfile_path = os.path.join(os.getcwd(), 'input.txt')\n\nwith open(file_path, 'r', encoding='utf-8') as f:\n    text = f.read()\n\nwords = re.split(r'[^a-zA-Z0-9]', text)\nwords = [word.lower() for word in words]\n\ncounter = Counter(words)\n\nsorted_words = sorted(counter.items(), key=lambda x: (-x[1], x[0]))\n\nfor word, count in sorted_words[:5]:\n    print(f\"{word} {count}\")\n```"
+   },
+   "doc-summary": {
+    "name": "文档总结（约 700 字 → ≤150 字）",
+    "score": 0,
+    "detail": "命中关键事实 0/5: [] | 长度 142 字",
+    "wall": 8.4,
+    "has_think": false,
+    "reasoning_len": 287,
+    "output": "星云2.0于2026年8月上线，由数据工程组重构，通过列式存储优化查询性能（P95延迟下降4倍），资源调度弹性扩容降低硬件成本。迁移方面，旧API将于2027年停用，需迁移支持团队协助，实时链路仍依赖旧组件。升级后将开放自助分析能力，重点推进实时链路统一与合作分析，整体目标实现预期。"
+   },
+   "data-contacts": {
+    "name": "数据整理：20 行杂乱联系人 → CSV",
+    "score": false,
+    "detail": "N/A=0 行数=18≠20; 行12列数=2",
+    "wall": 18.6,
+    "has_think": false,
+    "reasoning_len": 571,
+    "output": "姓名,电话,城市\n张三,13800138000,北京\n李四,13900139000,上海\n王五,13700137000,深圳\n赵六,13600136000,杭州\n孙七,13500135000,广州\n吴九,13300133000,成都\n郑十,13200132000,武汉\n张三,13800138000,北京\n陈一,13100131000,南京\n林二,13000130000,西安\n黄三,15900159000,重庆\n徐四,15800158000\n何五,15700157000,天津\n高六,15600156000,苏州\n罗七,15500155000,青岛\n梁八,15400154000,大连\n唐十,15200152000,宁波\n许一,15100151000,无锡"
+   }
+  }
+ },
+ "Qwen3.5-0.8B": {
+  "非思考": {
+   "code-ipv4": {
+    "name": "代码生成：IPv4 校验函数 + 自测断言",
+    "score": false,
+    "detail": "exit=1 stderr='results/general-tmp/ipv4.py\", line 42\\n    assert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6\\n                                                        ^\\nSyntaxError: EOL while scanning string literal'",
+    "wall": 31.5,
+    "has_think": false,
+    "reasoning_len": 0,
+    "output": "def is_valid_ipv4(s):\n    if not s:\n        return False\n    parts = s.split('.')\n    if len(parts) != 4:\n        return False\n    for part in parts:\n        if not part:\n            return False\n        if not part.isdigit():\n            return False\n        num = int(part)\n        if num > 255:\n            return False\n    return True\n\nassert is_valid_ipv4(\"256.1.1.1\") == False\nassert is_valid_ipv4(\"192.168.01.1\") == False\nassert is_valid_ipv4(\"1.2.3.4\") == True\nassert is_valid_ipv4(\"01.2.3.4\") == False\nassert is_valid_ipv4(\"1.2.3.4.5\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3.4\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3.4.5\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6.7\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6.7.8\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6.7.8.9\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6.7.8.9.0\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6.7.8.9.0.1\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6.7.8.9.0.1.2\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6.7.8.9.0.1.2.3\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6.7.8.9.0.1.2.3.4\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6.7.8.9.0.1.2.3.4.5\") == False\nassert is_valid_ipv4(\"1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6"
+   },
+   "code-wordfreq": {
+    "name": "代码生成：词频统计脚本",
+    "score": false,
+    "detail": "期望='the 11 | quick 7 | dog 6 | fox 6 | and 5' 实际='e 47 | o 22 | s 21 | r 20 | t 20'",
+    "wall": 6.2,
+    "has_think": false,
+    "reasoning_len": 0,
+    "output": "```python\nimport os\nfrom collections import Counter\n\ndef main():\n    # 读取 input.txt\n    with open('input.txt', 'r', encoding='utf-8') as f:\n        text = f.read()\n\n    # 按非字母数字字符切分成单词并转为小写\n    words = [char.lower() for char in text if char.isalnum()]\n\n    # 统计词频\n    counter = Counter(words)\n\n    # 按出现次数降序输出前 5 个\n    # 次数相同按字母序\n    sorted_words = sorted(counter.items(), key=lambda x: (-x[1], x[0]))\n\n    # 输出前 5 个\n    for word, count in sorted_words[:5]:\n        print(f\"{word} {count}\")\n\nif __name__ == \"__main__\":\n    main()\n```"
+   },
+   "doc-summary": {
+    "name": "文档总结（约 700 字 → ≤150 字）",
+    "score": 0,
+    "detail": "命中关键事实 0/5: [] | 长度 173 字",
+    "wall": 6.2,
+    "has_think": false,
+    "reasoning_len": 0,
+    "output": "星云 2.0 于 2026 年 8 月上线，核心改进包括查询引擎重写（P95 延迟降 4 倍、成本降 380 万）及易用性提升（80% 业务人员自助取数）。新版本已停用旧版 API（2027 年 3 月），列式存储实时写入支持待 2027 年 2.1 版本补齐。管理层承诺后续统一实时链路、开放外部自助分析，并持续压降存储成本，整体达成预期目标。"
+   },
+   "data-contacts": {
+    "name": "数据整理：20 行杂乱联系人 → CSV",
+    "score": false,
+    "detail": "N/A=0 行数=19≠20",
+    "wall": 11.8,
+    "has_think": false,
+    "reasoning_len": 0,
+    "output": "姓名,电话,城市\n张三,13800138000,北京\n李四,13900139000,上海\n王五,13700137000,深圳\n赵六,13600136000,杭州\n孙七,13500135000,\n周八,13400134000,广州\n吴九,13300133000,成都\n郑十,13200132000,武汉\n陈一,13100131000,南京\n林二,13000130000,西安\n黄三,15900159000,重庆\n徐四,15800158000,\n何五,15700157000,天津\n高六,15600156000,苏州\n罗七,15500155000,长沙\n梁八,15400154000,青岛\n宋九,15300153000,大连\n唐十,15200152000,宁波\n许一,15100151000,无锡"
+   }
+  },
+  "思考": {
+   "code-ipv4": {
+    "name": "代码生成：IPv4 校验函数 + 自测断言",
+    "score": true,
+    "detail": "断言全部通过（逻辑正确但漏了打印 OK）",
+    "wall": 133.0,
+    "has_think": false,
+    "reasoning_len": 10856,
+    "output": ""
+   },
+   "code-wordfreq": {
+    "name": "代码生成：词频统计脚本",
+    "score": false,
+    "detail": "期望='the 11 | quick 7 | dog 6 | fox 6 | and 5' 实际='and 5 | dog 6 | fox 6 | quick 7 | the 11'",
+    "wall": 20.5,
+    "has_think": false,
+    "reasoning_len": 317,
+    "output": "```python\nimport os\nfrom collections import Counter\nimport re\n\ndef main():\n    input_file = 'input.txt'\n    if not os.path.exists(input_file):\n        print(\"文件不存在，请确保输入文件位于当前目录\")\n        return\n    \n    with open(input_file, 'r', encoding='utf-8') as f:\n        lines = f.readlines()\n    \n    word_list = []\n    for line in lines:\n        line = line.strip()\n        words = re.findall(r'[a-zA-Z0-9]+', line)\n        word_list.extend([w.lower() for w in words])\n    \n    counter = Counter(word_list)\n    sorted_words = sorted(counter.items(), key=lambda x: x[1], reverse=True)[:5]\n    \n    # 按次数排序，次数相同按字母序\n    sorted_words = sorted(sorted_words, key=lambda x: (x[1], x[0]))\n    \n    for word, count in sorted_words:\n        print(f\"{word} {count}\")\n\nif __name__ == \"__main__\":\n    main()\n```\n\n```python\nimport os\nfrom collections import Counter\nimport re\n\ndef main():\n    input_file = 'input.txt'\n    if not os.path.exists(input_file):\n        print(\"文件不存在，请确保输入文件位于当前目录\")\n        return\n    \n    with open(input_file, 'r', encoding='utf-8') as f:\n        lines = f.readlines()\n    \n    word_list = []\n    for line in lines:\n        line = line.strip()\n        words = re.findall(r'[a-zA-Z0-9]+', line)\n        word_list.extend([w.lower() for w in words])\n    \n    counter = Counter(word_list)\n    sorted_words = sorted(counter.items(), key=lambda x: x[1], reverse=True)[:5]\n    \n    # 按次数排序，次数相同按字母序\n    sorted_words = sorted(sorted_words, key=lambda x: (x[1], x[0]))\n    \n    for word, count in sorted_words:\n        print(f\"{word} {count}\")\n\nif __name__ == \"__main__\":\n    main()\n```"
+   },
+   "doc-summary": {
+    "name": "文档总结（约 700 字 → ≤150 字）",
+    "score": 0,
+    "detail": "命中关键事实 0/5: [] | 长度 0 字",
+    "wall": 81.5,
+    "has_think": false,
+    "reasoning_len": 4681,
+    "output": ""
+   },
+   "data-contacts": {
+    "name": "数据整理：20 行杂乱联系人 → CSV",
+    "score": false,
+    "detail": "N/A=2 表头缺失/错误; 行数=19≠20",
+    "wall": 106.6,
+    "has_think": false,
+    "reasoning_len": 3728,
+    "output": "张三,13800138000,北京\n李四,13900139000,上海\n王五,13700137000,深圳\n赵六,13600136000,杭州\n孙七,13500135000,N/A\n周八,13400134000,广州\n吴九,13300133000,成都\n郑十,13200132000,武汉\n张三,13800138000,北京\n陈一,13100131000,南京\n林二,13000130000,西安\n黄三,15900159000,重庆\n徐四,15800158000,N/A\n何五,15700157000,天津\n高六,15600156000,苏州\n罗七,15500155000,长沙\n梁八,15400154000,青岛\n宋九,15300153000,大连\n唐十,15200152000,宁波\n许一,15100151000,无锡"
+   }
+  }
+ }
+}

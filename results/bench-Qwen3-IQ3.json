@@ -1,0 +1,507 @@
+{
+ "meta": {
+  "gguf": "Qwen3-0.6B-UD-IQ3_XXS.gguf",
+  "server_args": [
+   "--jinja",
+   "--chat-template-kwargs",
+   "{\"enable_thinking\": false}"
+  ],
+  "sampling": {
+   "temperature": 0.7,
+   "top_p": 0.8,
+   "top_k": 20
+  },
+  "port": 8552
+ },
+ "summary": {
+  "avg_latency_s": 0.499,
+  "avg_tok_s": 31.05,
+  "rss_mb": 1134.5
+ },
+ "records": {
+  "zh2en": [
+   {
+    "src": "今天天气不错，我们出去走走吧。",
+    "out": "today is nice, let's go out and have a good time.",
+    "wall": 0.467,
+    "tok": 15
+   },
+   {
+    "src": "我昨晚没睡好，今天有点犯困。",
+    "out": "I had a bad sleep last night and had some fatigue today.",
+    "wall": 0.43,
+    "tok": 14
+   },
+   {
+    "src": "这家餐厅的菜味道不错，就是价格有点贵。",
+    "out": "This is the dish's flavor is good, but the price is a bit higher.",
+    "wall": 0.537,
+    "tok": 18
+   },
+   {
+    "src": "你把快递放门口就行，我下班回去再拿。",
+    "out": "I don't need to put it in the door, I'll take it back.",
+    "wall": 0.543,
+    "tok": 18
+   },
+   {
+    "src": "孩子放学后要先写作业，然后才能看电视。",
+    "out": "child will have to first do homework before watching television.",
+    "wall": 0.406,
+    "tok": 12
+   },
+   {
+    "src": "医生建议我每天至少喝八杯水。",
+    "out": "The doctor advises that one should drink at least eight cups of water daily.",
+    "wall": 0.524,
+    "tok": 16
+   },
+   {
+    "src": "麻烦帮我把空调温度调低一点，谢谢。",
+    "out": "translation: please let me adjust the temperature to lower.",
+    "wall": 0.39,
+    "tok": 12
+   },
+   {
+    "src": "我们下周三上午十点开会，讨论新产品的发布计划。",
+    "out": "The meeting will be held on Wednesday at ten o'clock, regarding the new product development plan.",
+    "wall": 0.58,
+    "tok": 20
+   },
+   {
+    "src": "这款服务器支持横向扩展，可以通过增加节点来提升整体吞吐量。",
+    "out": "This server supports horizontal expansion, and can improve the overall throughput by increasing the number of nodes.",
+    "wall": 0.572,
+    "tok": 20
+   },
+   {
+    "src": "部署完成后，请先运行冒烟测试，确认所有接口返回正常。",
+    "out": "Deployed successfully. Please first run the smoke test to confirm that all interfaces are working.",
+    "wall": 0.559,
+    "tok": 19
+   },
+   {
+    "src": "数据库连接池的默认大小是十个，可以根据并发量进行调整。",
+    "out": "Database connection pool size is ten, which can be adjusted based on the number of users.",
+    "wall": 0.574,
+    "tok": 19
+   },
+   {
+    "src": "该算法的时间复杂度为 O(n log n)，在大数据集上表现良好。",
+    "out": "This algorithm has a time complexity of O(n log n), which performs well on large data sets.",
+    "wall": 0.636,
+    "tok": 21
+   },
+   {
+    "src": "请确保在生产环境中启用 HTTPS，并定期更新证书。",
+    "out": "Ensure that HTTPS is enabled, and update the certificates periodically.",
+    "wall": 0.432,
+    "tok": 13
+   },
+   {
+    "src": "缓存失效策略有三种：定时失效、主动失效和被动失效。",
+    "out": "Three types of cache expiration strategies: timed expiration, active expiration, and passive expiration.",
+    "wall": 0.533,
+    "tok": 18
+   },
+   {
+    "src": "这个软件是开源的，遵循 Apache 2.0 许可证，可以免费商用。",
+    "out": "This software is open-source, under the Apache 2.0 License, which is free for commercial use.",
+    "wall": 0.665,
+    "tok": 23
+   },
+   {
+    "src": "容器化部署可以保证开发环境和生产环境的一致性。",
+    "out": "containerized deployment ensures consistency between the development and production environments.",
+    "wall": 0.429,
+    "tok": 13
+   },
+   {
+    "src": "他总是画蛇添足，把本来简单的事情搞复杂了。",
+    "out": "He always draws things out of the picture, making things more complicated.",
+    "wall": 0.479,
+    "tok": 15
+   },
+   {
+    "src": "亡羊补牢，为时未晚。",
+    "out": "亡之至良，为时未晚。",
+    "wall": 0.368,
+    "tok": 11
+   },
+   {
+    "src": "塞翁失马，焉知非福。",
+    "out": "Translation:  \nTranslation:  \nCaozu's loss, what is it?",
+    "wall": 0.518,
+    "tok": 17
+   },
+   {
+    "src": "这次谈判我们要破釜沉舟，没有退路了。",
+    "out": "This negotiation has no further means.",
+    "wall": 0.311,
+    "tok": 8
+   },
+   {
+    "src": "他对这件事早就胸有成竹，所以一点也不慌。",
+    "out": "translation: he had a firm grip on it, so he didn't worry about it.",
+    "wall": 0.571,
+    "tok": 19
+   },
+   {
+    "src": "千里之行，始于足下。",
+    "out": "translation: long road, begins with walking.",
+    "wall": 0.36,
+    "tok": 10
+   },
+   {
+    "src": "入乡随俗，到了别人家就要遵守别人家的规矩。",
+    "out": "translation: into the customs and rules of the other's home.",
+    "wall": 0.437,
+    "tok": 14
+   },
+   {
+    "src": "纸包不住火，真相迟早会大白。",
+    "out": "translation: paper doesn't burn, the truth will be revealed.",
+    "wall": 0.442,
+    "tok": 14
+   },
+   {
+    "src": "尽管团队在过去几个月里遇到了资金短缺和人员流失的双重压力，他们仍然按计划完成了原型的开发工作。",
+    "out": "translation: although the team has faced two challenges in the past months, they have completed the prototype development.",
+    "wall": 0.691,
+    "tok": 22
+   },
+   {
+    "src": "由于气候变化导致的极端天气事件越来越频繁，许多沿海城市不得不重新评估其基础设施的设计标准。",
+    "out": "The increasing frequency of extreme weather events caused by climate change, many coastal cities have to reassess their infrastructure design standards.",
+    "wall": 0.759,
+    "tok": 25
+   },
+   {
+    "src": "报告指出，如果不采取更严格的减排措施，到本世纪末全球平均气温上升可能超过两摄氏度，这将带来不可逆转的生态后果。",
+    "out": "This will lead to irreversible consequences.",
+    "wall": 0.444,
+    "tok": 8
+   },
+   {
+    "src": "这本书的作者用通俗易懂的语言解释了量子计算的基本原理，即使是没有物理背景的读者也能读得津津有味。",
+    "out": "translated text: This book explains the basic principles in a simplified way, making it easy to understand for readers without technical backgrounds.",
+    "wall": 0.842,
+    "tok": 26
+   },
+   {
+    "src": "公司发言人在新闻发布会上表示，此次召回仅涉及特定批次的产品，消费者可以凭购买凭证到任意门店免费更换。",
+    "out": "translation: the company indicated that the recall only affected certain batches of products, and consumers can replace them at any store for free.",
+    "wall": 0.832,
+    "tok": 27
+   },
+   {
+    "src": "随着人工智能技术的快速发展，如何在提高效率的同时保护用户隐私，已经成为整个行业必须面对的问题。",
+    "out": "translation: With the rapid development of artificial intelligence technology, how to improve efficiency while protecting user privacy has become a key issue for the industry.",
+    "wall": 0.793,
+    "tok": 29
+   },
+   {
+    "src": "虽然线上线下融合的零售模式已经成为大势所趋，但许多传统企业仍然在数字化转型过程中举步维艰。",
+    "out": "The fashion of combining online and offline has become the trend, yet many traditional enterprises still struggle in the digital transformation.",
+    "wall": 0.751,
+    "tok": 24
+   },
+   {
+    "src": "教育部日前发布通知，要求各地学校不得以任何形式公布学生考试成绩排名，切实减轻学生的心理负担。",
+    "out": "The Ministry has issued a notice, requiring that schools in all regions to refrain from publishing students' performance rankings in any form, to alleviate students' psychological stress.",
+    "wall": 0.916,
+    "tok": 33
+   },
+   {
+    "src": "这个方案简直绝了，我直接一个好字不绝。",
+    "out": "This scheme is truly excellent.",
+    "wall": 0.297,
+    "tok": 7
+   },
+   {
+    "src": "别卷了，早点下班不好吗？",
+    "out": "translation: What's up?",
+    "wall": 0.279,
+    "tok": 7
+   },
+   {
+    "src": "这部电影我已被种草很久了，周末一定去看。",
+    "out": "This movie I have been waiting for long time since, I will come to watch.",
+    "wall": 0.601,
+    "tok": 18
+   },
+   {
+    "src": "他今天开会迟到又被老板点名，真是社死现场。",
+    "out": "He was late again for the meeting and was treated as a failure.",
+    "wall": 0.47,
+    "tok": 15
+   },
+   {
+    "src": "你也别太拼了，身体要紧，实在不行就先躺平一阵子。",
+    "out": "Also, it's important to focus on your strength, and if you can't do it, it's best to rest for a while.",
+    "wall": 0.778,
+    "tok": 29
+   },
+   {
+    "src": "这游戏优化太拉了，卡得我手机都烫手。",
+    "out": "This game is too good to make me touch the phone.",
+    "wall": 0.415,
+    "tok": 13
+   },
+   {
+    "src": "领导画的饼我一口都吃不下了。",
+    "out": "The whole thing I can't even take.",
+    "wall": 0.349,
+    "tok": 10
+   },
+   {
+    "src": "这家店的服务真的没得说，下次还来。",
+    "out": "The service is truly nothing to say about this.",
+    "wall": 0.37,
+    "tok": 11
+   }
+  ],
+  "en2zh": [
+   {
+    "src": "The weather is lovely today, let's go out for a walk.",
+    "out": "天气很好，让我们出去散步吧。",
+    "wall": 0.346,
+    "tok": 9
+   },
+   {
+    "src": "I didn't sleep well last night, so I'm feeling a bit drowsy today.",
+    "out": "失眠了。所以今天感觉有点睡得昏昏的。",
+    "wall": 0.463,
+    "tok": 14
+   },
+   {
+    "src": "The food at this restaurant is delicious, but it's a bit pricey.",
+    "out": "食品在这里看起来美味，但是价格较高。",
+    "wall": 0.369,
+    "tok": 10
+   },
+   {
+    "src": "Just leave the package at the door, I'll pick it up after work.",
+    "out": "将内容翻译成中文：  \n将物品放在门外，我将在工作后取回。",
+    "wall": 0.612,
+    "tok": 21
+   },
+   {
+    "src": "The kids need to finish their homework before they can watch TV.",
+    "out": "需要完成家务后才能看电视。",
+    "wall": 0.305,
+    "tok": 8
+   },
+   {
+    "src": "The doctor suggested I drink at least eight glasses of water a day.",
+    "out": "医生建议我每天至少喝八杯水。",
+    "wall": 0.369,
+    "tok": 11
+   },
+   {
+    "src": "Could you please turn down the air conditioning a little? Thanks.",
+    "out": "请减少空调的温度。谢谢。",
+    "wall": 0.325,
+    "tok": 9
+   },
+   {
+    "src": "We're having a meeting at 10 a.m. next Wednesday to discuss the launch plan for the new product.",
+    "out": "会议时间：10:00 AM（星期三）；讨论新产品开发计划。",
+    "wall": 0.632,
+    "tok": 20
+   },
+   {
+    "src": "This server supports horizontal scaling, so you can increase overall throughput by adding nodes.",
+    "out": "服务器支持水平扩展，因此可以增加整体吞吐量。",
+    "wall": 0.453,
+    "tok": 14
+   },
+   {
+    "src": "After deployment, please run a smoke test first to make sure all the APIs return correctly.",
+    "out": "后部署时，请确保所有API返回正确。",
+    "wall": 0.393,
+    "tok": 11
+   },
+   {
+    "src": "The default database connection pool size is ten, and you can adjust it based on concurrency.",
+    "out": "数据库连接池默认设置为10，可以根据并发情况进行调整。",
+    "wall": 0.504,
+    "tok": 16
+   },
+   {
+    "src": "The algorithm has a time complexity of O(n log n) and performs well on large datasets.",
+    "out": "算法的时间复杂度是 O(n log n)，并且在大型数据集方面表现良好。",
+    "wall": 0.602,
+    "tok": 20
+   },
+   {
+    "src": "Make sure HTTPS is enabled in production and that certificates are renewed regularly.",
+    "out": "确保在生产环境中启用 HTTPS，并定期更换证书。",
+    "wall": 0.399,
+    "tok": 12
+   },
+   {
+    "src": "There are three common cache invalidation strategies: time-based, active, and passive.",
+    "out": "三个常见的缓存失效策略：时间基于、主动的和被动的。",
+    "wall": 0.508,
+    "tok": 17
+   },
+   {
+    "src": "This software is open source under the Apache 2.0 license and is free for commercial use.",
+    "out": "这是开源软件，Apache 2.0 协议和商业用途。",
+    "wall": 0.519,
+    "tok": 17
+   },
+   {
+    "src": "Containerized deployment ensures consistency between development and production environments.",
+    "out": "容器化部署确保了开发和生产环境之间的一致性。",
+    "wall": 0.428,
+    "tok": 13
+   },
+   {
+    "src": "Don't count your chickens before they hatch.",
+    "out": "翻译成中文：不要在它们孵化前就数数。",
+    "wall": 0.459,
+    "tok": 14
+   },
+   {
+    "src": "It's not rocket science — anyone can learn it in an afternoon.",
+    "out": "它只是普通的科学 — 任何人可以在一天内学习它。",
+    "wall": 0.49,
+    "tok": 14
+   },
+   {
+    "src": "We're putting all our eggs in one basket, and that worries me.",
+    "out": "把所有鸡蛋放在一个篮子里，这让我感到很担心。",
+    "wall": 0.48,
+    "tok": 15
+   },
+   {
+    "src": "The manager hit the nail on the head when he said our biggest problem is communication.",
+    "out": "经理在说我们的最大问题是沟通时，击中了靶子。",
+    "wall": 0.491,
+    "tok": 16
+   },
+   {
+    "src": "Don't beat around the bush — just tell me what you really think.",
+    "out": "",
+    "wall": 0.158,
+    "tok": 1
+   },
+   {
+    "src": "That explanation is a piece of cake compared to what's coming next.",
+    "out": "那解释就是比接下来的那些更像。",
+    "wall": 0.369,
+    "tok": 11
+   },
+   {
+    "src": "She spilled the beans about the surprise party before it happened.",
+    "out": "她对突如其的惊喜感到惊讶。",
+    "wall": 0.32,
+    "tok": 9
+   },
+   {
+    "src": "Every cloud has a silver lining.",
+    "out": "Every cloud has a silver lining.",
+    "wall": 0.259,
+    "tok": 8
+   },
+   {
+    "src": "Although the team faced a dual challenge of funding shortages and staff turnover over the past few months, they still completed the prototype on schedule.",
+    "out": "完成了原型生产任务。",
+    "wall": 0.338,
+    "tok": 6
+   },
+   {
+    "src": "As extreme weather events caused by climate change become increasingly frequent, many coastal cities have had to reassess the design standards of their infrastructure.",
+    "out": "基础设施的建设标准需要重新评估。",
+    "wall": 0.411,
+    "tok": 9
+   },
+   {
+    "src": "The report warns that if no stricter emission cuts are adopted, global average temperatures could rise by more than two degrees Celsius by the end of the century, with irreversible ecological consequences.",
+    "out": "报告警告：如果采取更严格的减排措施，全球平均气温将超过20世纪末的平均值，将导致不可挽回的生态后果。",
+    "wall": 0.947,
+    "tok": 32
+   },
+   {
+    "src": "The author explains the basic principles of quantum computing in plain language, making the book a delightful read even for readers without a physics background.",
+    "out": "译文：作者阐述了量子计算的基本原理，使书籍内容变得轻松有趣，即使是那些没有物理背景的读者也能轻松阅读。",
+    "wall": 0.926,
+    "tok": 30
+   },
+   {
+    "src": "The company spokesperson said at the press conference that the recall only affects specific batches, and consumers can exchange the product free of charge at any store with a receipt.",
+    "out": "产品方发言人表示，在记者会中，只有特定批次的产品，消费者可以在有 receipts 的商店进行免费退货。",
+    "wall": 0.793,
+    "tok": 25
+   },
+   {
+    "src": "With the rapid development of artificial intelligence, how to improve efficiency while protecting user privacy has become a question the whole industry must face.",
+    "out": "人工智能快速发展，如何提高效率同时保护用户隐私已成为整个行业必须面对的问题。",
+    "wall": 0.619,
+    "tok": 18
+   },
+   {
+    "src": "Although the online-offline integrated retail model has become an irresistible trend, many traditional companies are still struggling with digital transformation.",
+    "out": "这是个趋势，但传统企业仍面临转型的问题。",
+    "wall": 0.426,
+    "tok": 13
+   },
+   {
+    "src": "The Ministry of Education issued a notice this week requiring schools not to publish student exam rankings in any form, in order to ease students' psychological pressure.",
+    "out": "教育部发布通知，要求在任何形式上停止公布学生考试排名，以减轻学生的压力。",
+    "wall": 0.707,
+    "tok": 22
+   },
+   {
+    "src": "Hang in there — it'll get better soon.",
+    "out": "译文：Hang in there — it'll get better soon.",
+    "wall": 0.437,
+    "tok": 14
+   },
+   {
+    "src": "I'm broke until payday, so let's just grab something cheap.",
+    "out": "我只有现在才可能赚到的钱，所以让我们先抓住什么便宜的事。",
+    "wall": 0.547,
+    "tok": 18
+   },
+   {
+    "src": "That new series is totally binge-worthy; I finished it in two days.",
+    "out": "这是完全吸金；我花了两天就完成了。",
+    "wall": 0.448,
+    "tok": 12
+   },
+   {
+    "src": "He ghosted me after the second date — no text, nothing.",
+    "out": "译文：他两次约会后没有回复，也没有内容。",
+    "wall": 0.443,
+    "tok": 14
+   },
+   {
+    "src": "This coffee hits different when it's freshly brewed.",
+    "out": "这样咖啡在新鲜的冲泡后会发出不同的声响。",
+    "wall": 0.45,
+    "tok": 14
+   },
+   {
+    "src": "Don't worry about the deadline, we'll figure it out as we go.",
+    "out": "",
+    "wall": 0.146,
+    "tok": 1
+   },
+   {
+    "src": "My boss keeps throwing around buzzwords like \"synergy\" in every meeting.",
+    "out": "我的老板经常在会议中频繁使用“协同”这个词。",
+    "wall": 0.444,
+    "tok": 14
+   },
+   {
+    "src": "Honestly, that idea is just noise — it won't get us anywhere.",
+    "out": "确实如此。",
+    "wall": 0.221,
+    "tok": 4
+   }
+  ]
+ }
+}

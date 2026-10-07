@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 翻译</title>
+<style>
+  :root {
+    --bg: #f1f4f9; --card: #ffffff; --line: #e3e8ef; --txt: #1f2733;
+    --muted: #7a8699; --accent: #2f6fed; --accent-soft: #eaf1ff;
+    --out-bg: #f7f9fc; --ok: #17964a; --err: #d64545;
+  }
+  html[data-theme="dark"] {
+    --bg: #14181f; --card: #1d232c; --line: #2c3542; --txt: #e6ebf2;
+    --muted: #8b96a8; --accent: #5b8def; --accent-soft: #26314a;
+    --out-bg: #171d26;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; background: var(--bg); color: var(--txt);
+    font: 15px/1.6 -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+    display: flex; flex-direction: column; align-items: center; padding: 24px 16px;
+  }
+  header { width: 100%; max-width: 1080px; display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  header h1 { font-size: 19px; margin: 0 auto 0 0; font-weight: 600; }
+  .dir-box {
+    display: flex; align-items: center; gap: 4px; background: var(--card);
+    border: 1px solid var(--line); border-radius: 10px; padding: 4px;
+  }
+  .dir-box button {
+    border: 0; background: transparent; color: var(--muted); font: inherit;
+    padding: 5px 12px; border-radius: 7px; cursor: pointer;
+  }
+  .dir-box button.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .dir-box .swap {
+    color: var(--accent); font-size: 16px; padding: 5px 8px;
+  }
+  main { width: 100%; max-width: 1080px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 720px) { main { grid-template-columns: 1fr; } }
+  .pane {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    display: flex; flex-direction: column; min-height: 380px; overflow: hidden;
+  }
+  .pane .label {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 16px; border-bottom: 1px solid var(--line);
+    color: var(--muted); font-size: 13px;
+  }
+  textarea, #output {
+    flex: 1; width: 100%; border: 0; outline: none; resize: none; padding: 16px;
+    background: transparent; color: var(--txt); font: inherit; font-size: 16px;
+  }
+  #output { background: var(--out-bg); white-space: pre-wrap; word-break: break-word; overflow-y: auto; }
+  .pane .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 12px 10px 16px; color: var(--muted); font-size: 12.5px;
+  }
+  .pane .foot button {
+    border: 0; background: transparent; color: var(--accent); font: inherit;
+    font-size: 13px; cursor: pointer; padding: 4px 8px; border-radius: 6px;
+  }
+  .pane .foot button:hover { background: var(--accent-soft); }
+  .go-bar { max-width: 1080px; width: 100%; margin-top: 14px; display: flex; gap: 10px; align-items: center; }
+  #go {
+    flex: 1; border: 0; border-radius: 12px; padding: 13px; font: inherit; font-size: 16px;
+    font-weight: 600; background: var(--accent); color: #fff; cursor: pointer;
+  }
+  #go:disabled { opacity: .55; cursor: default; }
+  #go.stop { background: var(--err); }
+  .hint { color: var(--muted); font-size: 12.5px; text-align: center; margin-top: 12px; }
+  .hint a { color: var(--muted); }
+  #status { font-size: 13px; margin-top: 8px; min-height: 20px; }
+  #status.err { color: var(--err); }
+  #status.ok { color: var(--ok); }
+  dialog {
+    border: 1px solid var(--line); border-radius: 12px; background: var(--card);
+    color: var(--txt); padding: 20px; width: min(420px, 92vw);
+  }
+  dialog::backdrop { background: rgba(0,0,0,.35); }
+  dialog input {
+    width: 100%; margin-top: 8px; padding: 9px 11px; font: inherit;
+    border: 1px solid var(--line); border-radius: 8px; background: var(--out-bg); color: var(--txt);
+  }
+  dialog .row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 14px; }
+  dialog button { font: inherit; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--out-bg); color: var(--txt); cursor: pointer; }
+  dialog button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+</style>
+</head>
+<body>
+<header>
+  <h1>AI 翻译</h1>
+  <div class="dir-box" id="dirBox">
+    <button data-dir="auto" class="active">自动检测</button>
+    <button data-dir="zh2en">中 → 英</button>
+    <button data-dir="en2zh">英 → 中</button>
+    <button class="swap" id="swapBtn" title="交换语言并回填">⇄</button>
+  </div>
+  <a class="swap" href="/chat.html" style="border:0;background:transparent;color:var(--muted);text-decoration:none;font-size:16px" title="对话模式">💬</a>
+  <button class="swap" id="themeBtn" style="border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:16px" title="主题：自动">🌗</button>
+  <button class="swap" id="keyBtn" style="border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:16px" title="设置">⚙</button>
+</header>
+
+<main>
+  <section class="pane">
+    <div class="label"><span>原文</span><span id="srcCount">0</span></div>
+    <textarea id="src" placeholder="输入要翻译的内容…&#10;Enter 翻译 / Shift+Enter 换行" autofocus></textarea>
+    <div class="foot">
+      <button id="clearBtn">清空</button>
+    </div>
+  </section>
+  <section class="pane">
+    <div class="label"><span>译文</span><span id="speed"></span></div>
+    <div id="output"></div>
+    <div class="foot">
+      <span id="outCount"></span>
+      <button id="copyBtn">复制</button>
+    </div>
+  </section>
+</main>
+
+<div class="go-bar">
+  <button id="go">翻 译</button>
+</div>
+<div id="status"></div>
+<div class="hint">Enter 翻译 · Shift+Enter 换行 · Esc 停止 · 也可通过 <code>/v1/chat/completions</code> OpenAI 兼容接口调用</div>
+
+<dialog id="keyDlg">
+  <h3 style="margin:0 0 4px">设置</h3>
+  <p style="margin:0;color:var(--muted);font-size:13px">均保存在本浏览器。API 密钥：服务端启用 --api-key 时填写；系统提示词：留空则不发送。</p>
+  <label for="keyInput" style="display:block;margin-top:10px;font-size:13px;color:var(--muted)">API 密钥</label>
+  <input id="keyInput" type="password" placeholder="sk-…">
+  <label for="sysInput" style="display:block;margin-top:10px;font-size:13px;color:var(--muted)">系统提示词（System Prompt）</label>
+  <textarea id="sysInput" rows="3" placeholder="留空则不发送系统提示词，例如：你是资深本地化译员，术语译法遵循 Microsoft 风格指南。" style="width:100%;margin-top:4px;padding:9px 11px;font:inherit;border:1px solid var(--line);border-radius:8px;background:var(--out-bg);color:var(--txt);resize:vertical;box-sizing:border-box"></textarea>
+  <div class="row">
+    <button id="keyClear">清除</button>
+    <button id="keySave" class="primary">保存</button>
+  </div>
+</dialog>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const srcEl = $("src"), outEl = $("output"), goBtn = $("go"), statusEl = $("status");
+let dir = "auto";            // auto | zh2en | en2zh
+let ctrl = null;             // AbortController
+let busy = false;
+
+// 与评测脚本一致的官方推荐模板与采样参数（Hy-MT2）
+const PROMPT = {
+  zh2en: t => "将以下文本翻译为 `英文`，注意只需要输出翻译后的结果，不要额外解释：\n" + t,
+  en2zh: t => "将以下文本翻译为 `中文`，注意只需要输出翻译后的结果，不要额外解释：\n" + t,
+};
+const SAMPLING = { temperature: 0.7, top_p: 0.6, top_k: 20, repeat_penalty: 1.05, max_tokens: 2048 };
+
+const cjk = s => (s.match(/[\u4e00-\u9fff\u3400-\u4dbf]/g) || []).length;
+const detect = s => (cjk(s) * 2 >= s.replace(/\s/g, "").length) ? "zh2en" : "en2zh";
+const think = s => s.replace(/<think>[\s\S]*?<\/think>/g, "").replace(/^<think>[\s\S]*$/, "");  // 未闭合的 think 也隐藏
+
+function setStatus(msg, cls) { statusEl.textContent = msg || ""; statusEl.className = cls || ""; }
+
+$("dirBox").addEventListener("click", e => {
+  const b = e.target.closest("button[data-dir]");
+  if (!b) return;
+  dir = b.dataset.dir;
+  document.querySelectorAll("#dirBox button[data-dir]").forEach(x => x.classList.toggle("active", x === b));
+});
+
+$("swapBtn").addEventListener("click", () => {
+  const t = outEl.textContent.trim();
+  if (t) { srcEl.value = t; updateCount(); }
+  if (dir === "zh2en") setDir("en2zh"); else if (dir === "en2zh") setDir("zh2en");
+  else if (t) setDir(detect(t) === "zh2en" ? "en2zh" : "zh2en");
+  srcEl.focus();
+});
+function setDir(d) {
+  dir = d;
+  document.querySelectorAll("#dirBox button[data-dir]").forEach(x => x.classList.toggle("active", x.dataset.dir === d));
+}
+
+function updateCount() { $("srcCount").textContent = srcEl.value.length; }
+srcEl.addEventListener("input", updateCount);
+
+$("clearBtn").addEventListener("click", () => { srcEl.value = ""; outEl.textContent = ""; updateCount(); $("outCount").textContent = ""; $("speed").textContent = ""; setStatus(""); srcEl.focus(); });
+
+$("copyBtn").addEventListener("click", async () => {
+  const t = outEl.textContent;
+  if (!t) return;
+  try { await navigator.clipboard.writeText(t); }
+  catch { const ta = document.createElement("textarea"); ta.value = t; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); }
+  $("copyBtn").textContent = "已复制";
+  setTimeout(() => $("copyBtn").textContent = "复制", 1200);
+});
+
+srcEl.addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); go(); }
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape" && busy) stop(); });
+
+function stop() { if (ctrl) ctrl.abort(); }
+function setBusy(b) {
+  busy = b;
+  goBtn.disabled = false;
+  goBtn.textContent = b ? "停 止" : "翻 译";
+  goBtn.classList.toggle("stop", b);
+}
+goBtn.addEventListener("click", () => busy ? stop() : go());
+
+async function go() {
+  const text = srcEl.value.trim();
+  if (!text) { setStatus("请输入要翻译的内容", "err"); return; }
+  const d = dir === "auto" ? detect(text) : dir;
+  outEl.textContent = ""; $("outCount").textContent = ""; $("speed").textContent = "";
+  setStatus(d === "zh2en" ? "检测为中文 → 翻译中…" : "检测为英文 → 翻译中…");
+  setBusy(true);
+  ctrl = new AbortController();
+
+  const headers = { "Content-Type": "application/json" };
+  const key = localStorage.getItem("api_key");
+  if (key) headers["Authorization"] = "Bearer " + key;
+
+  const messages = [];
+  const sysPrompt = localStorage.getItem("sys_prompt");
+  if (sysPrompt) messages.push({ role: "system", content: sysPrompt });
+  messages.push({ role: "user", content: PROMPT[d](text) });
+
+  const t0 = performance.now();
+  let raw = "", firstTok = 0, nTok = 0, chunks = 0;
+  try {
+    const resp = await fetch("/v1/chat/completions", {
+      method: "POST", headers, signal: ctrl.signal,
+      body: JSON.stringify({
+        messages, stream: true, stream_options: { include_usage: true }, ...SAMPLING,
+      }),
+    });
+    if (!resp.ok) throw new Error("HTTP " + resp.status + " " + (await resp.text()).slice(0, 200));
+    const reader = resp.body.getReader(), dec = new TextDecoder();
+    let buf = "";
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const lines = buf.split("\n"); buf = lines.pop();
+      for (const ln of lines) {
+        const s = ln.trim();
+        if (!s.startsWith("data:")) continue;
+        const data = s.slice(5).trim();
+        if (data === "[DONE]") continue;
+        let j; try { j = JSON.parse(data); } catch { continue; }
+        if (j.usage) nTok = j.usage.completion_tokens || nTok;
+        const delta = j.choices && j.choices[0] && j.choices[0].delta && j.choices[0].delta.content;
+        if (delta) { if (!firstTok) firstTok = performance.now(); chunks++; raw += delta; outEl.textContent = think(raw); outEl.scrollTop = outEl.scrollHeight; }
+      }
+    }
+    const final = think(raw).trim();
+    outEl.textContent = final;
+    $("outCount").textContent = final.length + " 字";
+    if (firstTok) {
+      const tEnd = performance.now();
+      const tok = nTok || chunks;   // 服务端未回 usage 时用分片数近似
+      const genSpeed = tok / ((tEnd - firstTok) / 1000);
+      $("speed").textContent = "首字 " + ((firstTok - t0) / 1000).toFixed(2) + "s · 生成 "
+        + genSpeed.toFixed(1) + " tok/s · " + tok + " tokens · 总耗时 " + ((tEnd - t0) / 1000).toFixed(1) + "s";
+    }
+    setStatus("完成", "ok");
+  } catch (err) {
+    if (err.name === "AbortError") { setStatus("已停止"); }
+    else { setStatus("翻译失败: " + err.message, "err"); }
+  } finally {
+    setBusy(false); ctrl = null; updateCount();
+  }
+}
+
+// 主题：自动（跟随系统）/ 浅色 / 深色，记忆在浏览器
+function applyTheme() {
+  const pref = localStorage.getItem("theme") || "auto";
+  const dark = pref === "dark" || (pref === "auto" && matchMedia("(prefers-color-scheme: dark)").matches);
+  document.documentElement.dataset.theme = dark ? "dark" : "light";
+  $("themeBtn").textContent = { auto: "🌗", light: "☀️", dark: "🌙" }[pref];
+  $("themeBtn").title = "主题：" + ({ auto: "自动（跟随系统）", light: "浅色", dark: "深色" }[pref]) + "，点击切换";
+}
+$("themeBtn").addEventListener("click", () => {
+  const order = ["auto", "light", "dark"];
+  const next = order[(order.indexOf(localStorage.getItem("theme") || "auto") + 1) % 3];
+  localStorage.setItem("theme", next);
+  applyTheme();
+});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
+
+$("keyBtn").addEventListener("click", () => { $("keyInput").value = localStorage.getItem("api_key") || ""; $("sysInput").value = localStorage.getItem("sys_prompt") || ""; $("keyDlg").showModal(); });
+$("keySave").addEventListener("click", e => {
+  e.preventDefault();
+  const k = $("keyInput").value.trim(), s = $("sysInput").value.trim();
+  k ? localStorage.setItem("api_key", k) : localStorage.removeItem("api_key");
+  s ? localStorage.setItem("sys_prompt", s) : localStorage.removeItem("sys_prompt");
+  $("keyDlg").close();
+});
+$("keyClear").addEventListener("click", e => { e.preventDefault(); localStorage.removeItem("api_key"); localStorage.removeItem("sys_prompt"); $("keyInput").value = ""; $("sysInput").value = ""; $("keyDlg").close(); });
+
+applyTheme();
+updateCount();
+</script>
+</body>
+</html>

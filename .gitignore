@@ -1,0 +1,26 @@
+# ---- 模型权重与运行时产物（体积大，官方源可下载） ----
+models/
+hf-hy-mt2/
+llama.cpp-repo/
+
+# ---- 构建产物（docker save 导出的镜像包，走 GitHub Releases 分发） ----
+*.tar.gz
+*.tar
+
+# ---- 本地环境与工具状态 ----
+.zcode/
+.vscode/
+__pycache__/
+*.pyc
+
+# ---- 测试临时产物 ----
+results/general-tmp/
+results/*.log
+
+# ---- 系统文件 ----
+.DS_Store
+Thumbs.db
+
+# ---- 工具私有配置与第三方原文 ----
+.zcodeignore
+scripts/pci.rst

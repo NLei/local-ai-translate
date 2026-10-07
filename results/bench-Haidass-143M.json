@@ -1,0 +1,505 @@
+{
+ "meta": {
+  "gguf": "haidass-translate-143m-q8_0.gguf",
+  "server_args": [
+   "--chat-template",
+   "chatml"
+  ],
+  "sampling": {
+   "temperature": 0.0,
+   "repeat_penalty": 1.1
+  },
+  "port": 8552
+ },
+ "summary": {
+  "avg_latency_s": 0.677,
+  "avg_tok_s": 98.27,
+  "rss_mb": 485.7
+ },
+ "records": {
+  "zh2en": [
+   {
+    "src": "今天天气不错，我们出去走走吧。",
+    "out": "Hey, I'm going to the park. Let me know if you want a ride!",
+    "wall": 0.223,
+    "tok": 21
+   },
+   {
+    "src": "我昨晚没睡好，今天有点犯困。",
+    "out": "I'm not feeling well this evening, and I have a little tired.",
+    "wall": 0.186,
+    "tok": 18
+   },
+   {
+    "src": "这家餐厅的菜味道不错，就是价格有点贵。",
+    "out": "- I'm sorry, but the restaurant is not very good. - No way! The price of food was too high for me... .\" – Sofia Kovács (@sofiakv) December 14th ,2013 at Dallas Houston International Airport",
+    "wall": 0.614,
+    "tok": 64
+   },
+   {
+    "src": "你把快递放门口就行，我下班回去再拿。",
+    "out": "- I'll take the mail back to you. - No, no! You can leave it at home and get a new one later.\" \"I will do that for your sake!\" said Mr Henderson... 'And if we don't have any more money in our pockets then they won't be able to buy us anything.'",
+    "wall": 0.846,
+    "tok": 71
+   },
+   {
+    "src": "孩子放学后要先写作业，然后才能看电视。",
+    "out": "- I'm going to the movies. - No, no! It is not a movie theater... it was an amusement park ... and there are some other attractions too.\" – The New York Times (Retrieved on February 14th). \"I am so glad you were able to watch this film",
+    "wall": 0.635,
+    "tok": 65
+   },
+   {
+    "src": "医生建议我每天至少喝八杯水。",
+    "out": "I recommend that I drink eight glasses of water a day.",
+    "wall": 0.138,
+    "tok": 13
+   },
+   {
+    "src": "麻烦帮我把空调温度调低一点，谢谢。",
+    "out": "I'm sorry, but I can not help you. Please turn the air conditioning down a little bit.\" - \"Sorry\" .\".",
+    "wall": 0.32,
+    "tok": 32
+   },
+   {
+    "src": "我们下周三上午十点开会，讨论新产品的发布计划。",
+    "out": "We have a meeting tomorrow morning at ten o'clock. We discuss the launch of new products in our company.\" - Mr . \"I am going to be here for one more hour\".\" – Ms.. “It is very important that we do not forget about this issue.” — Mrs...",
+    "wall": 0.58,
+    "tok": 61
+   },
+   {
+    "src": "这款服务器支持横向扩展，可以通过增加节点来提升整体吞吐量。",
+    "out": "The server supports horizontal scaling, which can increase throughput by adding more nodes.",
+    "wall": 0.179,
+    "tok": 16
+   },
+   {
+    "src": "部署完成后，请先运行冒烟测试，确认所有接口返回正常。",
+    "out": "The following is the code: The first line of this program will be executed. This function should return a value if it has been successfully run and no other functions are called from there, as long they have not yet started up in your console or web browser... . If you want to see more details about how these features work please check out the official documentation at http://www.cisco.com/en/corporate-support/.",
+    "wall": 0.902,
+    "tok": 90
+   },
+   {
+    "src": "数据库连接池的默认大小是十个，可以根据并发量进行调整。",
+    "out": "The default size of the database connection pool is ten, which can be adjusted according to workload.",
+    "wall": 0.238,
+    "tok": 20
+   },
+   {
+    "src": "该算法的时间复杂度为 O(n log n)，在大数据集上表现良好。",
+    "out": "The algorithm is time-efficient and works well on large data sets. It has been used in the field of machine learning for years, as a result it can be easily adapted to new problems or scenarios .",
+    "wall": 0.418,
+    "tok": 42
+   },
+   {
+    "src": "请确保在生产环境中启用 HTTPS，并定期更新证书。",
+    "out": "[email protected] [email protected] - I'm sorry, but you can not use this website. ] – The Website is no longer available for public viewing .\" — Sean McNally (@SeanMcNally) September 14th , July 2013 at http://www.web-soccer.com/index.php?page=article_id&id=59876 \" - I'm sorry, but you can not use this website .\" – Sean McNally (@SeanMcNally) September 14th , July 2013 at http://www.web-soccer.com/index.php?page=article_id&id=59876 \" - I'm sorry, but you can not use this website .\" – Sean McNally (@SeanMcNally) September 14th , July 2013 at http://www.web-soccer.com/index.php?page=article_id&id=59876 \" - I'm sorry, but you can not use this website .\" – Sean McNally (@SeanMcNally) September 14th , July 2013 at http://www.web-soccer.com/index.php?page=article_id&id=59876 \" - I'm sorry, but you can not use this website .\" – Sean McNally (@SeanMcNally) September 14th , July 2013 at http://www.web-soccer.com/index.php?page=article_id&id=59876 \" - I'm sorry, but you can not use this website .\" – Sean McNally (@SeanMcNally) September 14th , July 2013 at http://www.web-soccer.com/index.php?page=article_id&id=59876 \" - I'm sorry, but you can not use this website .\" – Sean McNally (@SeanMcNally) September 14th , July 2013 at http://www.web-soccer.com/index.php?page=article_id&id=59876 \" - I'm sorry, but you can not use this website .\" – Sean McNally (@SeanMcNally) September 14th , July 2013 at http://www.web-soccer.com/index.php?page=article_id&id=59876 \" - I'm sorry, but you can not use this website .\" – Sean McNally (@SeanMcNally) September 14th , July 2013 at http://www.web-soccer.com/index.php?page=article_id&id=59876 \" - I'm sorry, but you can not use this website .\" – Sean McNally (@SeanMcNally) September 14th , July 2013 at http://www.web-soccer.com/index.php?page=article_id&id=59876 \" - I'm sorry, but you can not use this website .\" – Sean McNally (@SeanMcNally) September 14th , July 2013 at http://www.web-soccer.com/index.php?page=article_id&id=59876 \" - I'm sorry, but you can not use this website .\" – Sean McNally (@SeanMcNally) September 14th , July 2013 at http://www.web-soccer.com/index.php?page=article_id&id=59876 \" - I'm sorry, but you can not use this website .\" – Sean McNally (@SeanMcNally) September 14th , July 2013 at http://www.web-soccer.com/index.php?page=article_id&id=59876 \" - I'm sorry, but you can not use this website .\" – Sean McNally (@SeanMcNally) September 14th , July 2013 at http://www.web-soccer.com",
+    "wall": 11.406,
+    "tok": 1024
+   },
+   {
+    "src": "缓存失效策略有三种：定时失效、主动失效和被动失效。",
+    "out": "The cache failure policy is a three-phase strategy: the time of availability, active and passive. The caching system can be divided into two categories; one for fast access to data or another type that stores more information in memory cells at high speed (e.g., RAM). This article will focus on this category as it has been used by many companies over a number years ago",
+    "wall": 0.756,
+    "tok": 77
+   },
+   {
+    "src": "这个软件是开源的，遵循 Apache 2.0 许可证，可以免费商用。",
+    "out": "The software is open source, and follows the license of Apache 2.0 for free commercial use .",
+    "wall": 0.286,
+    "tok": 22
+   },
+   {
+    "src": "容器化部署可以保证开发环境和生产环境的一致性。",
+    "out": "The container deployment can guarantee the consistency of development and production environments.",
+    "wall": 0.153,
+    "tok": 14
+   },
+   {
+    "src": "他总是画蛇添足，把本来简单的事情搞复杂了。",
+    "out": "He always makes things complicated, and he's never made it simple.",
+    "wall": 0.184,
+    "tok": 16
+   },
+   {
+    "src": "亡羊补牢，为时未晚。",
+    "out": "They are not the only ones. They're just a few of them, and they don't care about you anymore.\" - \"I Want to Be A Boy\" by The Beatles (1964).",
+    "wall": 0.525,
+    "tok": 49
+   },
+   {
+    "src": "塞翁失马，焉知非福。",
+    "out": "The following is a list of the most common words in English: \"Sir\". The word 'sir' has been used to refer only one person. It was not uncommon for people who were educated at home, such as those from England and Wales or Scotland (see also Sean Connery).",
+    "wall": 0.595,
+    "tok": 62
+   },
+   {
+    "src": "这次谈判我们要破釜沉舟，没有退路了。",
+    "out": "These are the words of a man who has been in prison for years. He is not only angry, but also depressed and unhappy at times.\" - The Man Who Was Prisoned For Years\". \"Augustine's Book\" (1987).",
+    "wall": 0.572,
+    "tok": 61
+   },
+   {
+    "src": "他对这件事早就胸有成竹，所以一点也不慌。",
+    "out": "He was very good at this, so he didn't have to worry about it.",
+    "wall": 0.204,
+    "tok": 19
+   },
+   {
+    "src": "千里之行，始于足下。",
+    "out": "The following is a list of the most common words in English: \"I\" and 's. The word I' has been used since at least as far back to ancient Greece, where it was known by its Greek name .\". It appears on many dictionaries that have included this term for example;",
+    "wall": 0.554,
+    "tok": 61
+   },
+   {
+    "src": "入乡随俗，到了别人家就要遵守别人家的规矩。",
+    "out": "They are not only the people who have to live in a world of convenience, but also those that want their own lives. They do so by living on what they can afford and without fear or shame.\" - Theodore Roosevelt\" . \"American Life\". pp. 10–12",
+    "wall": 0.581,
+    "tok": 63
+   },
+   {
+    "src": "纸包不住火，真相迟早会大白。",
+    "out": "The truth is, it's not gonna be the end of this. It will never happen to me.\" - The Wizard Of Oz\". \"Oh! Oh!\" I said in my head... 'I can do anything.'\" – Jason Mraz May 19 at .",
+    "wall": 0.662,
+    "tok": 64
+   },
+   {
+    "src": "尽管团队在过去几个月里遇到了资金短缺和人员流失的双重压力，他们仍然按计划完成了原型的开发工作。",
+    "out": "The team has been working on the prototype for several months, and they have managed to complete it successfully.",
+    "wall": 0.259,
+    "tok": 22
+   },
+   {
+    "src": "由于气候变化导致的极端天气事件越来越频繁，许多沿海城市不得不重新评估其基础设施的设计标准。",
+    "out": "The new design standards for coastal cities are being developed by the city of New York. The goal is to make them more resilient and adaptable in a changing climate.\"[…]” [...]\" \" ...the City's Design Standards\". . .. _ Cities &amp; Events",
+    "wall": 0.707,
+    "tok": 61
+   },
+   {
+    "src": "报告指出，如果不采取更严格的减排措施，到本世纪末全球平均气温上升可能超过两摄氏度，这将带来不可逆转的生态后果。",
+    "out": "The report also notes that if emissions cuts are not pursued, the global average temperature could rise by more than two degrees Celsius within this century. This will have irreversible consequences for ecosystems and humanity alike.”[1] The authors of both reports say they were “not prepared to take on a climate change-induced risk” [2].",
+    "wall": 0.792,
+    "tok": 67
+   },
+   {
+    "src": "这本书的作者用通俗易懂的语言解释了量子计算的基本原理，即使是没有物理背景的读者也能读得津津有味。",
+    "out": "The book is written in a way that makes the reader feel comfortable, even if they don’t have any background. The author uses simple language and explains quantum computing principles without being technical.” – Assistant” (2014).\"\". \".\" . “”。“] - Sean Chow",
+    "wall": 0.607,
+    "tok": 63
+   },
+   {
+    "src": "公司发言人在新闻发布会上表示，此次召回仅涉及特定批次的产品，消费者可以凭购买凭证到任意门店免费更换。",
+    "out": "]> Company spokesman said that the recall was limited to a specific batch of products and consumers could buy them at any store without having purchased their purchase receipt.",
+    "wall": 0.41,
+    "tok": 34
+   },
+   {
+    "src": "随着人工智能技术的快速发展，如何在提高效率的同时保护用户隐私，已经成为整个行业必须面对的问题。",
+    "out": "The question of how to protect users’ privacy while improving efficiency has become a critical issue for the entire industry.",
+    "wall": 0.331,
+    "tok": 23
+   },
+   {
+    "src": "虽然线上线下融合的零售模式已经成为大势所趋，但许多传统企业仍然在数字化转型过程中举步维艰。",
+    "out": "The traditional enterprises in the new era are still struggling to realize their full potential. The old way of thinking and doing is no longer applicable for them today’s world.” - Xi Jinping, China'S New Century\". [1] ... \"Innovation has been a key driver behind many industries that have gone through rapid growth in the past few years.\"",
+    "wall": 0.718,
+    "tok": 75
+   },
+   {
+    "src": "教育部日前发布通知，要求各地学校不得以任何形式公布学生考试成绩排名，切实减轻学生的心理负担。",
+    "out": "The Department of Education has recently issued a notice to schools that do not publish student test scores in any form, and effectively reduce the burden on students.",
+    "wall": 0.34,
+    "tok": 31
+   },
+   {
+    "src": "这个方案简直绝了，我直接一个好字不绝。",
+    "out": "I'm sure you will find it very useful. I have a good word for this one, too.\" - \"They are all right\".\" – The Singer (1987). – pp. xxviii-xxiii of the book:",
+    "wall": 0.584,
+    "tok": 60
+   },
+   {
+    "src": "别卷了，早点下班不好吗？",
+    "out": "- No, it's not. It hurts! - Yes? ! ? Oh... I don't know what to do with my head now that we are all here together in this world of computers and phones.\" – The Wizard Of Oz (1984) [2]",
+    "wall": 0.595,
+    "tok": 62
+   },
+   {
+    "src": "这部电影我已被种草很久了，周末一定去看。",
+    "out": "I've been watching this movie for a while and I think it will be on the weekend.",
+    "wall": 0.224,
+    "tok": 21
+   },
+   {
+    "src": "他今天开会迟到又被老板点名，真是社死现场。",
+    "out": "He was late for work and the boss called him. It's a hell of an office! .\" - \"They are not good at working.\" – The Daily Telegraph, Saturday Night (2013). He is now in his thirties with Parkinson’s disease",
+    "wall": 0.604,
+    "tok": 61
+   },
+   {
+    "src": "你也别太拼了，身体要紧，实在不行就先躺平一阵子。",
+    "out": "You don't have to be too hard on yourself, body is important. It doesn't matter if you are not strong enough for it or just a little bit weak in the beginning of your day... .\" - The Lion King (1984) [2] \"",
+    "wall": 0.637,
+    "tok": 60
+   },
+   {
+    "src": "这游戏优化太拉了，卡得我手机都烫手。",
+    "out": "- I'm not gonna get it. - Hey, you know what? It was a little too hot for my phone!",
+    "wall": 0.298,
+    "tok": 28
+   },
+   {
+    "src": "领导画的饼我一口都吃不下了。",
+    "out": "I'm not going to eat it. I can only take a bite of the pie.\" - \"The Pie\". The pizza is in my mouth! It was so good!\" – Jason Meyer (@jasonmeyer) September 19, '08",
+    "wall": 0.57,
+    "tok": 61
+   },
+   {
+    "src": "这家店的服务真的没得说，下次还来。",
+    "out": "- I'm not sure if you can make it. - No, but we will see about that later on.\" – \"I am sorry to hear this...\".\" — The Singer (UK) 'The Voice of the Weekly Magazine'.[1] [2] In a 3rd edition:",
+    "wall": 0.637,
+    "tok": 66
+   }
+  ],
+  "en2zh": [
+   {
+    "src": "The weather is lovely today, let's go out for a walk.",
+    "out": "I love the rain and it makes me feel like I am in heaven! -Hey !\" \" Hey!\" said my wife . She was so happy to see us again.\"- Oh... oh...\" she cried happily\".--The Weather: The weather is lovely today, let's go out for a walk.",
+    "wall": 0.659,
+    "tok": 68
+   },
+   {
+    "src": "I didn't sleep well last night, so I'm feeling a bit drowsy today.",
+    "out": "- Yeah? - Yes! It was the first time in my life that we had been together for more than two years... and it felt like an adventure to me now.\" --Jennifer Lopez (@jenniferlopez) February 10, 2011.",
+    "wall": 0.627,
+    "tok": 64
+   },
+   {
+    "src": "The food at this restaurant is delicious, but it's a bit pricey.",
+    "out": "I think the best way to make money in these industries would be by selling products and services that are of interest for customers.\" -Jimmy Chu\" \"It’ll take you about $10 per hour.” – Jimi Hendrix” “You can earn a lot more if it is something interesting.",
+    "wall": 0.641,
+    "tok": 66
+   },
+   {
+    "src": "Just leave the package at the door, I'll pick it up after work.",
+    "out": "I will take you to your office tomorrow morning if we can get together in time.\" \"Yes,\" said he; and she went out of her way with him into his room\".\"It is a good idea for me...to be able, I think ...and then go home after work.",
+    "wall": 0.59,
+    "tok": 61
+   },
+   {
+    "src": "The kids need to finish their homework before they can watch TV.",
+    "out": "- The children are supposedly going on a vacation with the family after school, right? - No! They're not taking part in any of our activities at this time... and we don't have anything else for them.\" – Mommy &apos; s Day.",
+    "wall": 0.564,
+    "tok": 60
+   },
+   {
+    "src": "The doctor suggested I drink at least eight glasses of water a day.",
+    "out": "- The Doctor said he would recommend that everybody get up and go to the bathroom in about an hour, so as not distracting him from his work or other responsibilities.\" - Dr Sean McCarthy\". \"Dr Sam's Blog\" . Retrieved on February 14th.",
+    "wall": 0.582,
+    "tok": 62
+   },
+   {
+    "src": "Could you please turn down the air conditioning a little? Thanks.",
+    "out": "I'm sorry I can not speak English, but it is very important to me that we have good relations with each other and our country.\" - \"They are in love\".\" – The New York Times .[1] [2] ...More... (PDF) ]]]>",
+    "wall": 0.571,
+    "tok": 61
+   },
+   {
+    "src": "We're having a meeting at 10 a.m. next Wednesday to discuss the launch plan for the new product.",
+    "out": "The following is an excerpt from our newsletter: \"Today we are going over some of your ideas and thoughts on how you can make this business work.\"\". The article was published in Business Week, March 2013 .\"We're having a meeting at 10 a.m., Wednesday next week to discuss the launch plan for our new product.”",
+    "wall": 0.774,
+    "tok": 78
+   },
+   {
+    "src": "This server supports horizontal scaling, so you can increase overall throughput by adding nodes.",
+    "out": "These are the only servers that I've seen to support vertical scalability: The ones with a \"Horizontal\" name have more than one node in them and they don't scale up or down as much.\" - Honeywell, Inc., CEO & Co-Founder\". Web.",
+    "wall": 0.59,
+    "tok": 61
+   },
+   {
+    "src": "After deployment, please run a smoke test first to make sure all the APIs return correctly.",
+    "out": "The following is an example of how you can use this feature: You want your app in order for it be able access and interact with other apps on its own level without having any dependencies or permissions from another application (e.g., a web browser). The first thing to do when using the smoke test method, however...",
+    "wall": 0.641,
+    "tok": 66
+   },
+   {
+    "src": "The default database connection pool size is ten, and you can adjust it based on concurrency.",
+    "out": "You may change the number of connections to be used in your application if needed by changing a configuration file or setting up an instance with multiple instances (see Configuring Multiple Instance).",
+    "wall": 0.367,
+    "tok": 36
+   },
+   {
+    "src": "The algorithm has a time complexity of O(n log n) and performs well on large datasets.",
+    "out": "Its implementation is based upon the following: The first line contains an integer N, which represents how many times to divide by each number in our input list; this value must be positive or negative (inclusive). For example if we have a string of numbers such as \"123456789\" then 0 is assigned.",
+    "wall": 0.682,
+    "tok": 72
+   },
+   {
+    "src": "Make sure HTTPS is enabled in production and that certificates are renewed regularly.",
+    "out": "- Make sure you have the certificate for your website up to date, as well . - You can use this service on any web site with a domain name of www or http://www.com/company/. This will be used by some third parties if they want access over an Internet connection.\"",
+    "wall": 0.584,
+    "tok": 60
+   },
+   {
+    "src": "There are three common cache invalidation strategies: time-based, active, and passive.",
+    "out": "The third is the Active Time Method which uses a timer to determine when an action should be performed in order for it not interfere with other actions on that page or process\". The second method was used by Google's own website as well.\" - Ted Turner\" . \"Time-based, active and passive methods of cache invalidation.",
+    "wall": 0.659,
+    "tok": 69
+   },
+   {
+    "src": "This software is open source under the Apache 2.0 license and is free for commercial use.",
+    "out": "The following are some of our favorite websites: http://www.myproject.com/index.php?id=15837694&page=1 &lang=en-US# _ The site has been updated since the last version was published in March, 2007",
+    "wall": 0.68,
+    "tok": 66
+   },
+   {
+    "src": "Containerized deployment ensures consistency between development and production environments.",
+    "out": "The containerization of the application guarantees consistent performance across all applications in a given environment .",
+    "wall": 0.19,
+    "tok": 18
+   },
+   {
+    "src": "Don't count your chickens before they hatch.",
+    "out": "- Don’t Count Your Chickens Before They Hatch! - I don’t know how to do that, but it is a good idea and the best way of doing this in my office... .\" – The New York Times Book Review \"They are not going away.\" —",
+    "wall": 0.566,
+    "tok": 60
+   },
+   {
+    "src": "It's not rocket science — anyone can learn it in an afternoon.",
+    "out": "I think the best way to get a job is by doing what you do, and then learning something new every day.\" - The Weekend Magazine\". \"The Best Way To Get A Job\" . Ibid., February-June 2013).” – “How Do You Make Money?",
+    "wall": 0.619,
+    "tok": 64
+   },
+   {
+    "src": "We're putting all our eggs in one basket, and that worries me.",
+    "out": "I think I can do this without any help from anyone else.\" - \"They are not even the same as you\".\" – The New York Times (Retrieved on February 12th). – p.370-459, pp.68-70",
+    "wall": 0.591,
+    "tok": 63
+   },
+   {
+    "src": "The manager hit the nail on the head when he said our biggest problem is communication.",
+    "out": "- He's a good guy, but I don't think we can afford to pay him for it.\" - The Man With A Gun\" (Video) \"I Think We Can Pay For It\". . – YouTube: http://www.youtube.com/watch?v=YZKQ0YJKWXA",
+    "wall": 0.662,
+    "tok": 71
+   },
+   {
+    "src": "Don't beat around the bush — just tell me what you really think.",
+    "out": "- Don’t be a bastard – Just say it out loud! - I know, but... .\" \"I mean…\". “You are not alone!” said one of them.\" Oh.” he added with his own voice: 'Oh!\" and then went on.",
+    "wall": 0.584,
+    "tok": 61
+   },
+   {
+    "src": "That explanation is a piece of cake compared to what's coming next.",
+    "out": "- I think it was the best way out there, but... - It wasn’t that great at all! – Jason Bowers May 19 '12 at .[email protected] The following are some examples: \"They were a good deal of money.",
+    "wall": 0.581,
+    "tok": 60
+   },
+   {
+    "src": "She spilled the beans about the surprise party before it happened.",
+    "out": "- She was surprised to see that she had a new baby in her arms! - Yeah, I'm not sure what you mean by \"new\"... but hey? You know how much we love each other?\" -- The Librarian (uncredited) .\".]",
+    "wall": 0.576,
+    "tok": 60
+   },
+   {
+    "src": "Every cloud has a silver lining.",
+    "out": "\"The Silver Lining of Clouds\". The New York Times, February 1987: pp. 20–21; \"Cloud Atlas.\" by the American Institute for Aeronautics and Astronautics (Aerospace). Retrieved on March 15, 2008",
+    "wall": 0.622,
+    "tok": 68
+   },
+   {
+    "src": "Although the team faced a dual challenge of funding shortages and staff turnover over the past few months, they still completed the prototype on schedule.",
+    "out": "They have been working with several companies to build prototypes for their own products since then; this has allowed them access in many markets where it is not possible or affordable at present.\" - Alessandro Vignola (Fabriti)\". The Guardian, February 19.",
+    "wall": 0.634,
+    "tok": 61
+   },
+   {
+    "src": "As extreme weather events caused by climate change become increasingly frequent, many coastal cities have had to reassess the design standards of their infrastructure.",
+    "out": "They are also concerned about how they will be able and willingly take on new challenges in a changing world.\" - The New York Times\" . \"New Worlds\". pp. 10–12, p.34-58 (PDF). Retrieved: February 17, 2010",
+    "wall": 0.792,
+    "tok": 69
+   },
+   {
+    "src": "The report warns that if no stricter emission cuts are adopted, global average temperatures could rise by more than two degrees Celsius by the end of the century, with irreversible ecological consequences.",
+    "out": "]}) The study concludes: \"There is a risk for climate change to be exacerbated in future due mainly to increased greenhouse gas emissions and their resulting effects on land-use patterns.\"[107 ]). It also notes that there are risks of further warming if the world's population continues its growth.",
+    "wall": 0.678,
+    "tok": 64
+   },
+   {
+    "src": "The author explains the basic principles of quantum computing in plain language, making the book a delightful read even for readers without a physics background.",
+    "out": "\"Quantum Computing: A Brief Introduction to Basic Principles\". Quanta Magazine (June 2010). pp. 3–4.\"The author explains basic principles of quantum computing in plain language, making the book an enjoyable read even for readers without a physics background.”",
+    "wall": 0.596,
+    "tok": 60
+   },
+   {
+    "src": "The company spokesperson said at the press conference that the recall only affects specific batches, and consumers can exchange the product free of charge at any store with a receipt.",
+    "out": "]) The Company Spokesperson: \"This recalls is limited to certain orders; customers are charged for exchanges without receipts.\").The company spokesperson said that recall only affects specific batches, and consumers can exchange the product free of charge at any store with a receipt.",
+    "wall": 0.589,
+    "tok": 60
+   },
+   {
+    "src": "With the rapid development of artificial intelligence, how to improve efficiency while protecting user privacy has become a question the whole industry must face.",
+    "out": "The problem is that it will be difficult for companies and organizations in order not only protect their own interests but also those they have earned from others’ successes or failures.\"。\" - The New York Times\". \"How to Improve Efficiency while Protecting User Privacy: A Question of the Whole Industry",
+    "wall": 0.569,
+    "tok": 61
+   },
+   {
+    "src": "Although the online-offline integrated retail model has become an irresistible trend, many traditional companies are still struggling with digital transformation.",
+    "out": "The company is currently in a state of transition and will be moving towards its next phase: new business models for customers.” The article also states that “the brand’s future looks bright” as it continues to evolve into the world market.\"。\" - Alibaba Group, China.",
+    "wall": 0.563,
+    "tok": 60
+   },
+   {
+    "src": "The Ministry of Education issued a notice this week requiring schools not to publish student exam rankings in any form, in order to ease students' psychological pressure.",
+    "out": "]> The ministry has recently released an announcement that requires all school districts and colleges nationwide -- including the ones where they are located -to release their test scores on-line instead of printing them out for grading purposes.\"[107][108]The Ministry is also issuing a notice this week requiring schools not to publish student exam rankings in any form, so as students' psychological pressure eases.",
+    "wall": 0.814,
+    "tok": 83
+   },
+   {
+    "src": "Hang in there — it'll get better soon.",
+    "out": "- I think we should go to the beach and have a picnic together! - Yeah, that would be great for us both... .\" \"I guess you can do this with your own hands.\" -- Sean: Yes? (laughing) Hang in there — it'll get better soon.",
+    "wall": 0.593,
+    "tok": 66
+   },
+   {
+    "src": "I'm broke until payday, so let's just grab something cheap.",
+    "out": "- I am broken till the day of payment... - So we can get some nice things for free!",
+    "wall": 0.226,
+    "tok": 22
+   },
+   {
+    "src": "That new series is totally binge-worthy; I finished it in two days.",
+    "out": "I'm not sure if this was a good idea, but the whole thing has been going on for about three months now.\" - \"The New York Times\" (Retrieved from: http://www.nytimes.com/2010/09/03/art/the-new-series-binge-worthy/.)",
+    "wall": 0.675,
+    "tok": 74
+   },
+   {
+    "src": "He ghosted me after the second date — no text, nothing.",
+    "out": "- He's gonna be in a relationship with you next time he gets there! - No texts at all !\" \"I don't know what to do.\" I said... 'No messages from him.' And then she replied: \"'Yes and yes!\" She was right.",
+    "wall": 0.546,
+    "tok": 60
+   },
+   {
+    "src": "This coffee hits different when it's freshly brewed.",
+    "out": "- I don’t know, but this is what Craig Coe calls his best work .\" - Spongebob Squarepants \" – English subtitles: “Craig coeni” (in French) and ‘SpongeBobby‘(in German).",
+    "wall": 0.562,
+    "tok": 62
+   },
+   {
+    "src": "Don't worry about the deadline, we'll figure it out as we go.",
+    "out": "I think I can do this without any trouble at all... but that is not what you want to be doing.\" - \"You know me better than anyone else\".\" – The Girl from Outer Space (2013) .[4] [5] ... 's a great example of how the word ‘universal’ can have an effect on people.",
+    "wall": 0.806,
+    "tok": 78
+   },
+   {
+    "src": "My boss keeps throwing around buzzwords like \"synergy\" in every meeting.",
+    "out": "- My manager kept boasting about the benefits of synergy meetings all year round, and I'm sure he was right! - Surely you can do that with a little bit more effort? – Yes ! You are doing it well enough to make this work for us.\" — \"You know what they say.",
+    "wall": 0.649,
+    "tok": 66
+   },
+   {
+    "src": "Honestly, that idea is just noise — it won't get us anywhere.",
+    "out": "I think the point of this story was to make people feel good about themselves and not be a bad person.\" - \"The Happiness Guru\" (2013).\". I believe in honesty as much, but also because you can see it from your own perspective.” – “Happy”.",
+    "wall": 0.624,
+    "tok": 64
+   }
+  ]
+ }
+}

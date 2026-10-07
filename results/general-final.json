@@ -1,0 +1,103 @@
+{
+ "Hy-MT2-1.8B": {
+  "非思考": {
+   "code-ipv4": {
+    "pass": false,
+    "note": "断言失败/语法错误"
+   },
+   "code-wordfreq": {
+    "pass": false,
+    "note": "运行报错"
+   },
+   "doc-summary": {
+    "facts": "5/5",
+    "len": 246,
+    "note": "星云数据平台2.0于2026年8月28日正式上线，由数据工程组耗时14个月重构，解决1.0版本多租户场景性能与运维问题。核心改进包括查询引擎全面重写，聚合查询P95延迟从1.8秒降至400毫秒，服务器"
+   },
+   "data-contacts": {
+    "pass": false,
+    "note": "N/A=0 行数=19≠20; 行12列数=2"
+   }
+  }
+ },
+ "Qwen3-0.6B": {
+  "非思考": {
+   "code-ipv4": {
+    "pass": false,
+    "note": "断言失败/语法错误"
+   },
+   "code-wordfreq": {
+    "pass": false,
+    "note": "运行报错"
+   },
+   "doc-summary": {
+    "facts": "5/5",
+    "len": 228,
+    "note": "星云数据平台2.0于2026年8月28日正式上线，由数据工程组重构完成，解决了1.0版本的性能与运维问题。核心改进包括查询引擎优化，聚合查询P95延迟下降至400毫秒，服务器数量缩减至70台，年度成本"
+   },
+   "data-contacts": {
+    "pass": false,
+    "note": "N/A=0 行数=19≠20; 行12列数=2"
+   }
+  },
+  "思考": {
+   "code-ipv4": {
+    "pass": false,
+    "note": "断言失败/语法错误"
+   },
+   "code-wordfreq": {
+    "pass": false,
+    "note": "运行报错"
+   },
+   "doc-summary": {
+    "facts": "4/5",
+    "len": 142,
+    "note": "星云2.0于2026年8月上线，由数据工程组重构，通过列式存储优化查询性能（P95延迟下降4倍），资源调度弹性扩容降低硬件成本。迁移方面，旧API将于2027年停用，需迁移支持团队协助，实时链路仍依赖"
+   },
+   "data-contacts": {
+    "pass": false,
+    "note": "N/A=0 行数=18≠20; 行12列数=2"
+   }
+  }
+ },
+ "Qwen3.5-0.8B": {
+  "非思考": {
+   "code-ipv4": {
+    "pass": false,
+    "note": "断言失败/语法错误"
+   },
+   "code-wordfreq": {
+    "pass": false,
+    "note": "运行报错"
+   },
+   "doc-summary": {
+    "facts": "5/5",
+    "len": 173,
+    "note": "星云 2.0 于 2026 年 8 月上线，核心改进包括查询引擎重写（P95 延迟降 4 倍、成本降 380 万）及易用性提升（80% 业务人员自助取数）。新版本已停用旧版 API（2027 年 3 "
+   },
+   "data-contacts": {
+    "pass": false,
+    "note": "N/A=0 行数=19≠20"
+   }
+  },
+  "思考": {
+   "code-ipv4": {
+    "pass": false,
+    "note": "断言失败/语法错误"
+   },
+   "code-wordfreq": {
+    "pass": false,
+    "note": "运行报错"
+   },
+   "doc-summary": {
+    "facts": "0/5",
+    "len": 0,
+    "note": ""
+   },
+   "data-contacts": {
+    "pass": false,
+    "note": "N/A=2 表头缺失/错误; 行数=19≠20"
+   }
+  }
+ }
+}

@@ -1,0 +1,10 @@
+# 白名单式忽略：只带源码、网页、脚本与指定模型进构建上下文
+*
+!llama.cpp-repo
+llama.cpp-repo/.git
+!web
+!docker
+!scripts
+!models
+models/*
+!models/Hy-MT2-1.8B-Q4_K_M.gguf

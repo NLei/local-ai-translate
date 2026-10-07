@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 对话</title>
+<style>
+  :root {
+    --bg: #f1f4f9; --card: #ffffff; --line: #e3e8ef; --txt: #1f2733;
+    --muted: #7a8699; --accent: #2f6fed; --accent-soft: #eaf1ff;
+    --out-bg: #f7f9fc; --ok: #17964a; --err: #d64545; --bubble-user: #2f6fed;
+  }
+  html[data-theme="dark"] {
+    --bg: #14181f; --card: #1d232c; --line: #2c3542; --txt: #e6ebf2;
+    --muted: #8b96a8; --accent: #5b8def; --accent-soft: #26314a;
+    --out-bg: #171d26; --bubble-user: #3268c9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; height: 100vh; display: flex; flex-direction: column;
+    background: var(--bg); color: var(--txt);
+    font: 15px/1.6 -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  }
+  header {
+    display: flex; align-items: center; gap: 8px; padding: 10px 14px;
+    background: var(--card); border-bottom: 1px solid var(--line); flex: none;
+  }
+  header h1 { font-size: 17px; margin: 0 auto 0 0; font-weight: 600; }
+  header a, header button {
+    border: 0; background: transparent; color: var(--muted); cursor: pointer;
+    font-size: 15px; text-decoration: none; padding: 4px 8px; border-radius: 8px; font-family: inherit;
+  }
+  header a:hover, header button:hover { background: var(--accent-soft); color: var(--accent); }
+  #msgs { flex: 1; overflow-y: auto; padding: 18px 16px; display: flex; flex-direction: column; gap: 14px; }
+  .row { display: flex; gap: 10px; align-items: flex-end; }
+  .row.user { justify-content: flex-end; }
+  .bubble {
+    max-width: min(78%, 720px); padding: 10px 14px; border-radius: 14px;
+    word-break: break-word; overflow-wrap: anywhere; white-space: normal;
+  }
+  .user .bubble { background: var(--bubble-user); color: #fff; border-bottom-right-radius: 4px; }
+  .assistant .bubble { background: var(--card); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+  .assistant .bubble.streaming::after { content: "▍"; opacity: .6; animation: blink 1s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .avatar { width: 30px; height: 30px; border-radius: 50%; flex: none; display: flex;
+    align-items: center; justify-content: center; font-size: 15px; background: var(--accent-soft); color: var(--accent); }
+  .bubble p { margin: 0 0 8px; } .bubble p:last-child { margin-bottom: 0; }
+  .bubble pre { background: var(--out-bg); border: 1px solid var(--line); border-radius: 8px;
+    padding: 10px; overflow-x: auto; font-size: 13px; margin: 8px 0; }
+  .bubble code { font-family: ui-monospace, Consolas, "Courier New", monospace; font-size: 13px; }
+  .bubble :not(pre) > code { background: var(--out-bg); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; }
+  .bubble ul, .bubble ol { margin: 6px 0; padding-left: 22px; }
+  .bubble blockquote { margin: 6px 0; padding: 2px 12px; border-left: 3px solid var(--accent); color: var(--muted); }
+  .bubble h2, .bubble h3, .bubble h4, .bubble h5 { margin: 10px 0 6px; font-size: 15px; }
+  .bubble details { margin: 4px 0 8px; color: var(--muted); font-size: 13px; }
+  .bubble details summary { cursor: pointer; }
+  .bubble details .reason { white-space: pre-wrap; border-left: 2px solid var(--line); padding-left: 10px; margin-top: 6px; }
+  .errbox { color: var(--err); font-size: 13px; }
+  footer { flex: none; padding: 10px 14px 12px; background: var(--card); border-top: 1px solid var(--line); }
+  .input-row { display: flex; gap: 10px; align-items: flex-end; max-width: 980px; margin: 0 auto; }
+  textarea#input {
+    flex: 1; resize: none; border: 1px solid var(--line); border-radius: 12px;
+    padding: 10px 12px; font: inherit; background: var(--out-bg); color: var(--txt);
+    min-height: 44px; max-height: 200px; outline: none;
+  }
+  textarea#input:focus { border-color: var(--accent); }
+  #send {
+    border: 0; border-radius: 12px; padding: 0 20px; height: 44px; font: inherit; font-weight: 600;
+    background: var(--accent); color: #fff; cursor: pointer; flex: none;
+  }
+  #send:disabled { opacity: .5; cursor: default; }
+  #send.stop { background: var(--err); }
+  .hint { text-align: center; color: var(--muted); font-size: 12px; margin-top: 6px; }
+  dialog {
+    border: 1px solid var(--line); border-radius: 12px; background: var(--card);
+    color: var(--txt); padding: 18px 20px; width: min(460px, 92vw);
+  }
+  dialog::backdrop { background: rgba(0,0,0,.35); }
+  dialog label { display: block; margin-top: 10px; font-size: 13px; color: var(--muted); }
+  dialog input[type=number] {
+    width: 110px; margin-top: 3px; padding: 7px 9px; font: inherit;
+    border: 1px solid var(--line); border-radius: 8px; background: var(--out-bg); color: var(--txt);
+  }
+  dialog textarea, dialog input[type=text], dialog input[type=password] {
+    width: 100%; margin-top: 3px; padding: 8px 10px; font: inherit;
+    border: 1px solid var(--line); border-radius: 8px; background: var(--out-bg); color: var(--txt); resize: vertical;
+  }
+  dialog .grid { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+  dialog .row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 14px; }
+  dialog button { font: inherit; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--out-bg); color: var(--txt); cursor: pointer; }
+  dialog button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+</style>
+</head>
+<body>
+<header>
+  <h1>AI 对话</h1>
+  <a href="/" title="返回翻译">译</a>
+  <button id="clearBtn" title="清空对话，开始新对话">🧹</button>
+  <button id="themeBtn" title="主题">🌗</button>
+  <button id="setBtn" title="模型参数设置">⚙</button>
+</header>
+
+<div id="msgs"></div>
+
+<footer>
+  <div class="input-row">
+    <textarea id="input" rows="1" placeholder="输入消息，Enter 发送，Shift+Enter 换行"></textarea>
+    <button id="send">发 送</button>
+  </div>
+  <div class="hint">多轮对话 · 参数可在 ⚙ 中调整 · 内容仅保存在本浏览器</div>
+</footer>
+
+<dialog id="setDlg">
+  <h3 style="margin:0 0 4px">模型参数</h3>
+  <div class="grid">
+    <div><label for="pTemp">temperature</label><input id="pTemp" type="number" step="0.05" min="0" max="2"></div>
+    <div><label for="pTopP">top_p</label><input id="pTopP" type="number" step="0.05" min="0" max="1"></div>
+    <div><label for="pTopK">top_k</label><input id="pTopK" type="number" step="1" min="1" max="100"></div>
+    <div><label for="pRep">repeat_penalty</label><input id="pRep" type="number" step="0.05" min="1" max="2"></div>
+    <div><label for="pMax">max_tokens</label><input id="pMax" type="number" step="128" min="64" max="8192"></div>
+  </div>
+  <label for="pSys">系统提示词（留空则不发送）</label>
+  <textarea id="pSys" rows="3" placeholder="例如：你是嵌入式 Linux 专家，回答使用中文，代码用英文注释。"></textarea>
+  <div class="row">
+    <button id="setDefault">恢复默认</button>
+    <button id="setSave" class="primary">保存</button>
+  </div>
+</dialog>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const msgsEl = $("msgs"), inputEl = $("input"), sendBtn = $("send");
+let busy = false, ctrl = null;
+let history = [];                       // [{role, content}]
+const DEF = { temperature: 0.7, top_p: 0.8, top_k: 20, repeat_penalty: 1.05, max_tokens: 2048, system: "" };
+
+// ---------- 主题（与翻译页共用同一存储键） ----------
+function applyTheme() {
+  const pref = localStorage.getItem("theme") || "auto";
+  const dark = pref === "dark" || (pref === "auto" && matchMedia("(prefers-color-scheme: dark)").matches);
+  document.documentElement.dataset.theme = dark ? "dark" : "light";
+  $("themeBtn").textContent = { auto: "🌗", light: "☀️", dark: "🌙" }[pref];
+  $("themeBtn").title = "主题：" + ({ auto: "自动（跟随系统）", light: "浅色", dark: "深色" }[pref]) + "，点击切换";
+}
+$("themeBtn").addEventListener("click", () => {
+  const order = ["auto", "light", "dark"];
+  const next = order[(order.indexOf(localStorage.getItem("theme") || "auto") + 1) % 3];
+  localStorage.setItem("theme", next);
+  applyTheme();
+});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
+
+// ---------- 参数 ----------
+function getParams() {
+  try { return Object.assign({}, DEF, JSON.parse(localStorage.getItem("chat_params") || "{}")); }
+  catch { return Object.assign({}, DEF); }
+}
+function openSettings() {
+  const p = getParams();
+  $("pTemp").value = p.temperature; $("pTopP").value = p.top_p; $("pTopK").value = p.top_k;
+  $("pRep").value = p.repeat_penalty; $("pMax").value = p.max_tokens; $("pSys").value = p.system;
+  $("setDlg").showModal();
+}
+$("setBtn").addEventListener("click", openSettings);
+$("setDefault").addEventListener("click", e => {
+  e.preventDefault();
+  $("pTemp").value = DEF.temperature; $("pTopP").value = DEF.top_p; $("pTopK").value = DEF.top_k;
+  $("pRep").value = DEF.repeat_penalty; $("pMax").value = DEF.max_tokens; $("pSys").value = DEF.system;
+});
+$("setSave").addEventListener("click", e => {
+  e.preventDefault();
+  const p = {
+    temperature: Math.min(2, Math.max(0, parseFloat($("pTemp").value) || DEF.temperature)),
+    top_p: Math.min(1, Math.max(0, parseFloat($("pTopP").value) || DEF.top_p)),
+    top_k: Math.min(100, Math.max(1, parseInt($("pTopK").value) || DEF.top_k)),
+    repeat_penalty: Math.min(2, Math.max(1, parseFloat($("pRep").value) || DEF.repeat_penalty)),
+    max_tokens: Math.min(8192, Math.max(64, parseInt($("pMax").value) || DEF.max_tokens)),
+    system: $("pSys").value.trim(),
+  };
+  localStorage.setItem("chat_params", JSON.stringify(p));
+  $("setDlg").close();
+});
+
+// ---------- 迷你 Markdown 渲染（先转义，防注入） ----------
+function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+function mdRender(src) {
+  let s = esc(src || "").replace(/\r/g, "");
+  const blocks = [];
+  s = s.replace(/```(\w*)\n?([\s\S]*?)```/g, (m, l, c) => {
+    blocks.push("<pre><code>" + c.replace(/\n+$/, "") + "</code></pre>");
+    return "\u0000B" + (blocks.length - 1) + "\u0000";
+  });
+  const inline = x => x
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<em>$2</em>")
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  const lines = s.split("\n"); const out = []; let list = null;
+  const closeList = () => { if (list) { out.push("</" + list + ">"); list = null; } };
+  for (const ln of lines) {
+    let m;
+    if (/^\u0000B\d+\u0000$/.test(ln.trim())) { closeList(); out.push(ln.trim()); continue; }
+    if ((m = ln.match(/^(#{1,4})\s+(.*)/))) { closeList(); out.push("<h" + (m[1].length + 1) + ">" + inline(m[2]) + "</h" + (m[1].length + 1) + ">"); continue; }
+    if ((m = ln.match(/^\s*[-*]\s+(.*)/))) { if (list !== "ul") { closeList(); out.push("<ul>"); list = "ul"; } out.push("<li>" + inline(m[1]) + "</li>"); continue; }
+    if ((m = ln.match(/^\s*\d+[.)]\s+(.*)/))) { if (list !== "ol") { closeList(); out.push("<ol>"); list = "ol"; } out.push("<li>" + inline(m[1]) + "</li>"); continue; }
+    if ((m = ln.match(/^>\s?(.*)/))) { closeList(); out.push("<blockquote>" + inline(m[1]) + "</blockquote>"); continue; }
+    if (!ln.trim()) { closeList(); continue; }
+    closeList(); out.push("<p>" + inline(ln) + "</p>");
+  }
+  closeList();
+  return out.join("").replace(/\u0000B(\d+)\u0000/g, (m, i) => blocks[+i]);
+}
+
+// ---------- 气泡 ----------
+function addBubble(role, html, reasoning) {
+  const row = document.createElement("div");
+  row.className = "row " + role;
+  if (role === "assistant") {
+    const av = document.createElement("div"); av.className = "avatar"; av.textContent = "AI";
+    row.appendChild(av);
+  }
+  const b = document.createElement("div"); b.className = "bubble";
+  if (reasoning) {
+    const det = document.createElement("details");
+    det.innerHTML = "<summary>思考过程</summary><div class='reason'></div>";
+    det.querySelector(".reason").textContent = reasoning;
+    b.appendChild(det);
+  }
+  const body = document.createElement("div");
+  b.appendChild(body);
+  row.appendChild(b);
+  msgsEl.appendChild(row);
+  msgsEl.scrollTop = msgsEl.scrollHeight;
+  return { row, body };
+}
+function scrollBottom() { msgsEl.scrollTop = msgsEl.scrollHeight; }
+
+// ---------- 发送 ----------
+function setBusy(b) {
+  busy = b;
+  sendBtn.textContent = b ? "停 止" : "发 送";
+  sendBtn.classList.toggle("stop", b);
+}
+function stop() { if (ctrl) ctrl.abort(); }
+
+async function send() {
+  if (busy) { stop(); return; }
+  const text = inputEl.value.trim();
+  if (!text) return;
+  inputEl.value = ""; inputEl.style.height = "auto";
+  history.push({ role: "user", content: text });
+  addBubble("user", "<p>" + esc(text) + "</p>");
+  saveHistory();
+
+  const { row, body } = addBubble("assistant", "");
+  body.classList.add("streaming");
+  setBusy(true);
+  ctrl = new AbortController();
+
+  const headers = { "Content-Type": "application/json" };
+  const key = localStorage.getItem("api_key");
+  if (key) headers["Authorization"] = "Bearer " + key;
+
+  const p = getParams();
+  const msgs = [];
+  if (p.system) msgs.push({ role: "system", content: p.system });
+  msgs.push(...history.slice(-40));                  // 最多带最近 20 轮
+
+  let raw = "", reasoning = "", nTok = 0, firstTok = 0, chunks = 0;
+  const t0 = performance.now();
+  try {
+    const resp = await fetch("/v1/chat/completions", {
+      method: "POST", headers, signal: ctrl.signal,
+      body: JSON.stringify({ messages: msgs, stream: true, stream_options: { include_usage: true },
+                             temperature: p.temperature, top_p: p.top_p, top_k: p.top_k,
+                             repeat_penalty: p.repeat_penalty, max_tokens: p.max_tokens }),
+    });
+    if (!resp.ok) throw new Error("HTTP " + resp.status + " " + (await resp.text()).slice(0, 200));
+    const reader = resp.body.getReader(), dec = new TextDecoder();
+    let buf = "";
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const lines = buf.split("\n"); buf = lines.pop();
+      for (const ln of lines) {
+        const s = ln.trim();
+        if (!s.startsWith("data:")) continue;
+        const data = s.slice(5).trim();
+        if (data === "[DONE]") continue;
+        let j; try { j = JSON.parse(data); } catch { continue; }
+        if (j.usage) nTok = j.usage.completion_tokens || nTok;
+        const delta = j.choices && j.choices[0] && j.choices[0].delta || {};
+        if (delta.reasoning_content) reasoning += delta.reasoning_content;
+        if (delta.content) {
+          if (!firstTok) firstTok = performance.now();
+          chunks++;
+          raw += delta.content;
+          body.innerHTML = mdRender(raw);
+          scrollBottom();
+        }
+      }
+    }
+    const det0 = body.querySelector("details");
+    if (det0) { const r = det0.querySelector(".reason"); r.textContent = reasoning; }
+    body.classList.remove("streaming");
+    if (!raw.trim()) {
+      body.innerHTML = "<p class='errbox'>（未返回内容" + (reasoning ? "，思考过程见上方" : "）") + "</p>";
+      history.pop();                                  // 空回复不进历史
+    } else {
+      history.push({ role: "assistant", content: raw });
+      if (firstTok) {
+        const tEnd = performance.now();
+        const tok = nTok || chunks;                   // 服务端未回 usage 时用分片数近似
+        const genSpeed = tok / ((tEnd - firstTok) / 1000);
+        const tip = document.createElement("div");
+        tip.style.cssText = "font-size:12px;color:var(--muted);margin-top:4px";
+        tip.textContent = "首字 " + ((firstTok - t0) / 1000).toFixed(2) + "s · 生成 "
+          + genSpeed.toFixed(1) + " tok/s · " + tok + " tokens · 总耗时 " + ((tEnd - t0) / 1000).toFixed(1) + "s";
+        row.appendChild(tip);
+      }
+    }
+    saveHistory();
+  } catch (err) {
+    body.classList.remove("streaming");
+    if (err.name === "AbortError") {
+      if (raw.trim()) { history.push({ role: "assistant", content: raw }); saveHistory(); }
+      else { row.remove(); history.pop(); saveHistory(); }
+      body.innerHTML = mdRender(raw) + "<p class='errbox'>已停止</p>";
+    } else {
+      body.innerHTML = "<p class='errbox'>请求失败: " + esc(err.message) + "</p>";
+    }
+  } finally {
+    setBusy(false); ctrl = null; scrollBottom();
+  }
+}
+
+// ---------- 历史 ----------
+function saveHistory() {
+  try { localStorage.setItem("chat_history", JSON.stringify(history.slice(-60))); } catch {}
+}
+function loadHistory() {
+  try { return JSON.parse(localStorage.getItem("chat_history") || "[]"); } catch { return []; }
+}
+function renderAll() {
+  msgsEl.innerHTML = "";
+  for (const m of history) addBubble(m.role === "user" ? "user" : "assistant", mdRender(m.content));
+  scrollBottom();
+}
+$("clearBtn").addEventListener("click", () => {
+  history = []; saveHistory(); renderAll();
+});
+
+// ---------- 输入 ----------
+function autoGrow() { inputEl.style.height = "auto"; inputEl.style.height = Math.min(inputEl.scrollHeight, 200) + "px"; }
+inputEl.addEventListener("input", autoGrow);
+inputEl.addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+});
+sendBtn.addEventListener("click", send);
+
+// ---------- 初始化 ----------
+applyTheme();
+history = loadHistory();
+if (history.length) renderAll();
+else {
+  addBubble("assistant", "<p>你好！我是本地部署的翻译模型兼任的对话助手（能力有限，代码与整理类任务建议使用专业大模型）。<br>在右上角 ⚙ 可调整模型参数与系统提示词。</p>");
+}
+inputEl.focus();
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+services:
+  translate:
+    image: ai-translate:hy-mt2-1.8b
+    container_name: ai-translate
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: "8080"
+      CTX: "8192"          # 上下文长度；长文档翻译可调大
+      THREADS: "0"         # 0 = 自动（使用全部物理核心）
+      # API_KEY: "sk-xxxx" # 需要鉴权时取消注释
+    volumes: []            # 模型已内置；如需外挂: - ./model.gguf:/app/model.gguf
+    restart: unless-stopped
