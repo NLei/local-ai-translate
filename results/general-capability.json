@@ -4,7 +4,7 @@
    "code-ipv4": {
     "name": "代码生成：IPv4 校验函数 + 自测断言",
     "score": false,
-    "detail": "exit=1 stderr=' (most recent call last):\\n  File \"/home/user/Nlei/trans/results/general-tmp/ipv4.py\", line 1, in <module>\\n    assert not is_valid_ipv4(\\'256.1.1.1\\')  # 非法\\nNameError: name \\'is_valid_ipv4\\' is not defined'",
+    "detail": "exit=1 stderr=' (most recent call last):\\n  File \"results/general-tmp/ipv4.py\", line 1, in <module>\\n    assert not is_valid_ipv4(\\'256.1.1.1\\')  # 非法\\nNameError: name \\'is_valid_ipv4\\' is not defined'",
     "wall": 7.3,
     "has_think": false,
     "reasoning_len": 0,
@@ -44,7 +44,7 @@
    "code-ipv4": {
     "name": "代码生成：IPv4 校验函数 + 自测断言",
     "score": false,
-    "detail": "exit=1 stderr='File \"/home/user/Nlei/trans/results/general-tmp/ipv4.py\", line 1\\n    ```python\\n    ^\\nSyntaxError: invalid syntax'",
+    "detail": "exit=1 stderr='File \"results/general-tmp/ipv4.py\", line 1\\n    ```python\\n    ^\\nSyntaxError: invalid syntax'",
     "wall": 25.9,
     "has_think": false,
     "reasoning_len": 0,
@@ -82,7 +82,7 @@
    "code-ipv4": {
     "name": "代码生成：IPv4 校验函数 + 自测断言",
     "score": false,
-    "detail": "exit=1 stderr='Traceback (most recent call last):\\n  File \"/home/user/Nlei/trans/results/general-tmp/ipv4.py\", line 12, in <module>\\n    assert is_valid_ipv4(\\'256.1.1.1\\') == True\\nAssertionError'",
+    "detail": "exit=1 stderr='Traceback (most recent call last):\\n  File \"results/general-tmp/ipv4.py\", line 12, in <module>\\n    assert is_valid_ipv4(\\'256.1.1.1\\') == True\\nAssertionError'",
     "wall": 26.8,
     "has_think": false,
     "reasoning_len": 1563,
@@ -91,7 +91,7 @@
    "code-wordfreq": {
     "name": "代码生成：词频统计脚本",
     "score": false,
-    "detail": "exit=1 stderr='Traceback (most recent call last):\\n  File \"/home/user/Nlei/trans/results/general-tmp/wordfreq.py\", line 10, in <module>\\n    words = re.split(r\\'[^a-zA-Z0-9]\\', text)\\nNameError: name \\'re\\' is not defined'",
+    "detail": "exit=1 stderr='Traceback (most recent call last):\\n  File \"results/general-tmp/wordfreq.py\", line 10, in <module>\\n    words = re.split(r\\'[^a-zA-Z0-9]\\', text)\\nNameError: name \\'re\\' is not defined'",
     "wall": 28.2,
     "has_think": false,
     "reasoning_len": 2341,

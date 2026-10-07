@@ -201,7 +201,24 @@ python3 scripts/test_stopping.py <端口> <标注>
 | `hf-hy-mt2/`、`.zcode/`、`.vscode/`、`results/general-tmp/` | 本地工作状态与工具配置 |
 | `scripts/pci.rst`（GPL-2.0 原文） | 第三方 GPL 文档不与 MIT 仓库混发；仓库内只保留转写的测试夹具 `techdoc_passages.md`，原文按链接重新下载 |
 
-**提交前检查**：`grep -r zxcv --exclude-dir=llama.cpp-repo --exclude-dir=models .` 应无结果（本机路径已在发布前清洗）；`git status` 里不应出现任何 >50MB 的文件。
+**提交前检查**：`grep -rn "本机用户名与主机名" --exclude-dir=llama.cpp-repo --exclude-dir=models .` 应无结果（本机路径已在发布前清洗）；`git status` 里不应出现任何 >50MB 的文件。
+
+### 镜像包发布到 GitHub Releases
+
+tar.gz 属于构建产物，不进 git，但适合作为 Release 附件分发（单文件上限 2GB，两个包均符合）：
+
+- **网页操作**：仓库页 → Releases → Draft a new release → 填 tag（如 `v1.0.0`）与标题 → 拖入 `ai-translate-hy-mt2-1.8b.tar.gz` 与 `ai-translate-qwen35-0.8b.tar.gz` → Publish
+- **gh CLI**（需先 `gh auth login`）：
+
+```bash
+gh release create v1.0.0 \
+  ai-translate-hy-mt2-1.8b.tar.gz \
+  ai-translate-qwen35-0.8b.tar.gz \
+  --title "ai-translate v1.0.0" \
+  --notes "主镜像（Hy-MT2-1.8B，质量最佳）与轻量镜像（Qwen3.5-0.8B，零漏译）。docker load 后离线运行，见 README。"
+```
+
+更新版本时创建新 tag 即可，旧附件自动保留历史。
 
 ### 已知限制与后续方向
 

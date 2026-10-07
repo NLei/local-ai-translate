@@ -26,7 +26,7 @@
 | `ai-translate:hy-mt2-1.8b` | Hy-MT2-1.8B Q4_K_M | **1.07 GB** (`ai-translate-hy-mt2-1.8b.tar.gz`) | ~2.4 GB | 18 tok/s | **主推**：质量全面最佳，技术文档尤甚 |
 | `ai-translate:qwen35-0.8b` | Qwen3.5-0.8B Q4_K_M | **529 MB** (`ai-translate-qwen35-0.8b.tar.gz`) | ~0.9 GB | 22 tok/s | 轻量：零漏译，低配服务器 |
 
-> 两个 tar.gz 已在仓库根目录，可直接 `docker load`（无需网络）。
+> 两个 tar.gz 从本仓库 **Releases** 页下载（或按「构建与产物」自行构建），`docker load` 后离线可用。
 > 轻量镜像第四轮测试后由 Qwen3-0.6B 换装为 **Qwen3.5-0.8B**：实测 Qwen3-0.6B 对成语/口语英→中存在漏译倾向（Q4→BF16 均无法消除，属模型行为），而 Qwen3.5-0.8B 在同一测试集上零漏译。详见 [results/analysis.md](results/analysis.md) 第四轮。
 > 注意：Qwen3.5 是 SSM+注意力混合架构，SSM 状态常驻内存与并发槽位成正比，**必须保持 `PARALLEL=1`**（镜像已内置）后再按需调大。
 
@@ -49,7 +49,7 @@ cd docker && docker compose up -d
 ### 离线部署（无网服务器）
 
 ```bash
-# ① 把仓库根目录的 tar.gz 拷贝到离线服务器（U盘/内网）
+# ① 从本仓库 Releases 下载 tar.gz（或自行构建），拷贝到离线服务器（U盘/内网）
 # ② 一键导入并启动（轻量版把镜像名换成 ai-translate:qwen35-0.8b）
 docker load < ai-translate-hy-mt2-1.8b.tar.gz
 docker run -d --name ai-translate -p 8080:8080 --restart unless-stopped \
